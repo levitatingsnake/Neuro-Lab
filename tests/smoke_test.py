@@ -27,11 +27,12 @@ class NeuroLabSmokeTests(unittest.TestCase):
     def test_inner_cosmos_has_four_distinct_hub_options(self):
         tabs = re.findall(r'<button[^>]*class="cosmos-tab[^"]*"[^>]*data-cosmos="([^"]+)"[^>]*>(.*?)</button>', self.html)
         labels = {key: re.sub(r"<[^>]+>", "", label).replace("&amp;", "&").strip() for key, label in tabs}
-        self.assertEqual(set(labels), {"stars", "cycle", "library", "mind"})
+        self.assertEqual(set(labels), {"stars", "cycle", "library", "mind", "tarot"})
         self.assertIn("Birth chart", labels["stars"])
         self.assertIn("Cycle", labels["cycle"])
         self.assertIn("Wisdom library", labels["library"])
         self.assertIn("Mind Training", labels["mind"])
+        self.assertIn("Tarot", labels["tarot"])
 
     def test_mind_training_has_a_dedicated_panel_and_route(self):
         self.assertIn('id="mindHome"', self.html)
@@ -108,6 +109,31 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('id="sunArtisticToggle"', self.html)
         self.assertIn("loadLiveSun(activeSunChannel);if(typeof window.neuroLabLoadSpaceWeather", self.html)
         self.assertIn("NASA SOLAR DYNAMICS OBSERVATORY", self.html)
+
+    def test_tarot_reader_lives_in_inner_cosmos_with_random_spreads(self):
+        self.assertIn('id="cosmosTarot"', self.html)
+        self.assertIn('data-cosmos="tarot"', self.html)
+        self.assertIn('id="tarotQuestion"', self.html)
+        self.assertIn('id="tarotDeck"', self.html)
+        self.assertIn('id="tarotSpread"', self.html)
+        self.assertIn('id="drawTarot"', self.html)
+        self.assertIn('id="tarotDrawAgain"', self.html)
+        self.assertIn("function shuffleTarot(deck)", self.html)
+        self.assertIn("shuffleTarot(buildTarotDeck()).slice(0,count)", self.html)
+        self.assertIn("function tarotCardReading", self.html)
+        self.assertIn("WEAVING THE CARDS TOGETHER", self.html)
+        self.assertIn("@keyframes tarot-reveal", self.html)
+        self.assertIn("prefers-reduced-motion:reduce", self.html)
+        self.assertIn("Egyptian-inspired mythic lens", self.html)
+        self.assertIn("Thoth tradition", self.html)
+
+    def test_outer_cosmos_has_mission_control_navigation(self):
+        self.assertIn('id="outerMissionControl"', self.html)
+        self.assertIn('data-observatory-target="cosmosSun"', self.html)
+        self.assertIn('data-observatory-target="solarOrbitPanel"', self.html)
+        self.assertIn('data-observatory-target="auroraPanel"', self.html)
+        self.assertIn('data-observatory-target="spaceDataGrid"', self.html)
+        self.assertIn('id="liveSunImage"', self.html)
 
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
