@@ -87,6 +87,16 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("saveMind();renderMindSkills()", self.html)
         self.assertIn("renderMindHistory();renderMindSkills();", self.html)
 
+    def test_mind_missions_save_reflections_and_recommend_next_step(self):
+        self.assertIn('id="mindNextRecommendation"', self.html)
+        self.assertIn("Your reflection (optional)", self.html)
+        self.assertIn('className="mind-mission-reflection"', self.html)
+        self.assertIn("mindState.missionReflections[mission.id]=reflection.value.trim()", self.html)
+        self.assertIn("mindState.missionCompletedAt[mission.id]=new Date().toISOString()", self.html)
+        self.assertIn('latest.outcome==="hard"||latest.outcome==="missed"', self.html)
+        self.assertIn('latest.outcome==="helped"', self.html)
+        self.assertIn("SUGGESTED NEXT STEP", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
