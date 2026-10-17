@@ -44,6 +44,14 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('window.confirm("Restore this backup?', self.html)
         self.assertIn("course-[a-z0-9_-]+", self.html)
 
+    def test_backup_is_inside_mind_training_and_preserves_cycle_settings(self):
+        mind_start = self.html.index('id="mindHome"')
+        mind_end = self.html.index("</section>", mind_start)
+        backup_pos = self.html.index('id="dataBackup"')
+        self.assertLess(mind_start, backup_pos)
+        self.assertLess(backup_pos, mind_end)
+        self.assertIn("cycle-v1", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
