@@ -350,7 +350,22 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
   if(b.lat!=null&&b.lon!=null&&b.time){const T=(jd-2451545)/36525,gmst=norm(280.46061837+360.98564736629*(jd-2451545)+.000387933*T*T-T*T*T/38710000),theta=norm(gmst+Number(b.lon)),phi=Number(b.lat)*DEG,eps=23.439291-.0130042*T,asc=norm(Math.atan2(-Math.cos(theta*DEG),Math.sin(eps*DEG)*Math.tan(phi)+Math.cos(eps*DEG)*Math.sin(theta*DEG))/DEG+180);out.Ascendant=asc}
   return out;
  }
- const baseReport=makeDailyReport;
+ const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ const notes={
+  Aries:"Initiative and courage are useful themes to reflect on. Where could a small, thoughtful first step help?",
+  Taurus:"Stability and patience are useful themes to reflect on. What is worth building steadily?",
+  Gemini:"Curiosity and communication are useful themes to reflect on. What conversation or question could open a new door?",
+  Cancer:"Care and emotional awareness are useful themes to reflect on. What helps you feel grounded and connected?",
+  Leo:"Creative expression and confidence are useful themes to reflect on. Where can you contribute without needing to perform?",
+  Virgo:"Practical improvement and discernment are useful themes to reflect on. What small adjustment would genuinely help?",
+  Libra:"Balance and cooperation are useful themes to reflect on. Where would honest conversation improve a connection?",
+  Scorpio:"Depth and transformation are useful themes to reflect on. What are you ready to understand more clearly?",
+  Sagittarius:"Learning and perspective are useful themes to reflect on. What assumption might be worth testing?",
+  Capricorn:"Persistence and responsibility are useful themes to reflect on. Which long-term goal deserves one practical step?",
+  Aquarius:"Independence and community are useful themes to reflect on. How can your originality contribute to something shared?",
+  Pisces:"Imagination and compassion are useful themes to reflect on. Where would a little grounding help turn insight into action?"
+ };
+ const prompts=["What are you ready to approach with curiosity today?","What is one small action that would support your longer-term goals?","Which belief deserves a closer look rather than an automatic yes?","What would progress look like if you made it sustainable?","Where could you respond thoughtfully instead of reacting automatically?"];
  window.neuroLabRenderChart=function(b){
   const result=document.getElementById("birthResult");
   try{
@@ -368,16 +383,15 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
    const keys=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn"];
    const rows=keys.map(k=>'<article class="planet-row"><div><strong>'+k+'</strong><p class="planet-meaning">'+descriptions[k]+'</p></div><div class="planet-position">'+fmt(pos[k])+'</div></article>').join("");
    const asc=pos.Ascendant!=null?'<article class="planet-row"><div><strong>Ascendant</strong><p class="planet-meaning">'+descriptions.Ascendant+'</p></div><div class="planet-position">'+fmt(pos.Ascendant)+'</div></article>':'<p class="muted">Ascendant not calculated yet. Open Advanced chart settings and enter birth latitude, longitude, birth time and the UTC offset that applied at your birth.</p>';
-   const sunNote=signNotes[sign]||"Treat this as a reflection prompt rather than a prediction.";
+   const sunNote=notes[sign]||"Treat this as a reflection prompt rather than a prediction.";
    const moonSign=signAt(pos.Moon);
-   result.innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR NATAL SKY · APPROXIMATE POSITIONS</div><h2>'+escapeHtml(sign)+' Sun</h2><p class="muted">'+escapeHtml(b.place||"Birthplace not entered")+' · '+escapeHtml(b.date)+(b.time?" · "+escapeHtml(b.time):" · birth time unknown")+'</p><p><strong>Sun in '+escapeHtml(sign)+':</strong> '+escapeHtml(sunNote)+'</p><p><strong>Moon in '+escapeHtml(moonSign)+':</strong> This sign is traditionally used as a lens for emotional habits and needs. Notice which parts fit your lived experience rather than treating them as fixed facts.</p><h3>Planetary placements</h3><div class="planet-grid">'+rows+asc+'</div><h3>How to read this chart</h3><p>The Sun is one part of an astrology chart, not the whole personality. The Moon is commonly read for emotional patterns; Mercury for thought and communication; Venus for values and relationships; Mars for action; Jupiter for growth; and Saturn for responsibility and boundaries.</p><p>These are symbolic interpretations from an astrological tradition, not scientifically established personality measurements or predictions. Planet positions here use an offline, low-precision calculation and can differ from professional ephemeris software.</p><div class="eyebrow" style="margin-top:18px">TODAY'S REFLECTION · '+escapeHtml(dayKey)+'</div><h3>'+escapeHtml(dailyPrompts[(now.getDate()+now.getMonth()*3+sign.length)%dailyPrompts.length])+'</h3><p>'+escapeHtml(sunNote)+'</p><p><strong>Reflection:</strong> What part of this theme is genuinely useful to you today, and what does not fit?</p><button class="primary" id="refreshReport" type="button">Refresh today's reflection</button></div>';
+   result.innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR NATAL SKY · APPROXIMATE POSITIONS</div><h2>'+esc(sign)+' Sun</h2><p class="muted">'+esc(b.place||"Birthplace not entered")+' · '+esc(b.date)+(b.time?" · "+esc(b.time):" · birth time unknown")+'</p><p><strong>Sun in '+esc(sign)+':</strong> '+esc(sunNote)+'</p><p><strong>Moon in '+esc(moonSign)+':</strong> This sign is traditionally used as a lens for emotional habits and needs. Notice which parts fit your lived experience rather than treating them as fixed facts.</p><h3>Planetary placements</h3><div class="planet-grid">'+rows+asc+'</div><h3>How to read this chart</h3><p>The Sun is one part of an astrology chart, not the whole personality. The Moon is commonly read for emotional patterns; Mercury for thought and communication; Venus for values and relationships; Mars for action; Jupiter for growth; and Saturn for responsibility and boundaries.</p><p>These are symbolic interpretations from an astrological tradition, not scientifically established personality measurements or predictions. Planet positions here use an offline, low-precision calculation and can differ from professional ephemeris software.</p><div class="eyebrow" style="margin-top:18px">TODAY'S REFLECTION · '+esc(dayKey)+'</div><h3>'+esc(prompts[(now.getDate()+now.getMonth()*3+sign.length)%dailyPrompts.length])+'</h3><p>'+esc(sunNote)+'</p><p><strong>Reflection:</strong> What part of this theme is genuinely useful to you today, and what does not fit?</p><button class="primary" id="refreshReport" type="button">Refresh today's reflection</button></div>';
    const refresh=document.getElementById("refreshReport");if(refresh)refresh.onclick=()=>window.neuroLabRenderChart(b);
   }catch(err){
    console.error("Astrology chart generation failed:",err);
-   if(result)result.innerHTML='<div class="cosmos-result"><h3>Your birth profile is saved, but the chart engine hit an error.</h3><p>Please check that the birth date is valid, then tap Create my astrology profile again. The technical error is recorded in the browser console.</p><p>Saved date: '+escapeHtml(b.date||"not entered")+'</p></div>';
+   if(result)result.innerHTML='<div class="cosmos-result"><h3>Your birth profile is saved, but the chart engine hit an error.</h3><p>Please check that the birth date is valid, then tap Create my astrology profile again. The technical error is recorded in the browser console.</p><p>Saved date: '+esc(b.date||"not entered")+'</p></div>';
   }
  }
- makeDailyReport=window.neuroLabRenderChart;
 })();
 
 /* Navigation fallback: keeps Cosmos clickable even if another app initialiser fails. */
