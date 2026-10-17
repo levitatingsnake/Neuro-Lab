@@ -97,6 +97,18 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('latest.outcome==="helped"', self.html)
         self.assertIn("SUGGESTED NEXT STEP", self.html)
 
+    def test_outer_cosmos_uses_refreshing_nasa_solar_images(self):
+        self.assertIn('id="liveSunImage"', self.html)
+        self.assertIn('data-sun-channel="0171"', self.html)
+        self.assertIn('data-sun-channel="0193"', self.html)
+        self.assertIn('data-sun-channel="0304"', self.html)
+        self.assertIn('data-sun-channel="HMII"', self.html)
+        self.assertIn("https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_", self.html)
+        self.assertIn("15*60*1000", self.html)
+        self.assertIn('id="sunArtisticToggle"', self.html)
+        self.assertIn("loadLiveSun(activeSunChannel);if(typeof window.neuroLabLoadSpaceWeather", self.html)
+        self.assertIn("NASA SOLAR DYNAMICS OBSERVATORY", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
