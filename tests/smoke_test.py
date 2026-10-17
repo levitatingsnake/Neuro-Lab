@@ -58,6 +58,14 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("entry.reflection=document.getElementById", self.html)
         self.assertIn("renderMindHistory();if(mindState.step", self.html)
 
+    def test_mind_progress_insights_use_saved_checkin_counts(self):
+        self.assertIn('id="mindProgressInsights"', self.html)
+        self.assertIn('const counts=entries.reduce', self.html)
+        self.assertIn('"Check-ins"', self.html)
+        self.assertIn('"Helpful moments"', self.html)
+        self.assertIn('"Adjustments"', self.html)
+        self.assertIn("Your first check-in will create a baseline.", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
