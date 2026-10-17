@@ -126,6 +126,13 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("prefers-reduced-motion:reduce", self.html)
         self.assertIn("Egyptian-inspired mythic lens", self.html)
         self.assertIn("Thoth tradition", self.html)
+        for spread in ('value="4"', 'value="6"', 'value="7"', 'value="9"', 'value="12"'):
+            self.assertIn(spread, self.html)
+        self.assertIn("const tarotLayouts=", self.html)
+        self.assertIn("spreadIntros", self.html)
+        self.assertIn("spread-12", self.html)
+        self.assertIn("@keyframes tarot-console-scan", self.html)
+        self.assertIn("@keyframes tarot-button-sweep", self.html)
 
     def test_tarot_saved_archive_is_local_and_included_in_backup(self):
         self.assertIn('id="tarotSavedList"', self.html)
