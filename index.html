@@ -317,9 +317,10 @@ initMind();
 
 if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.log("Offline setup unavailable",err)))}
 </script>
+<script src="./astronomy.browser.min.js"></script>
 <script>
 
-/* Offline astronomical approximation based on low-precision orbital elements.
+/* Planetary positions use Astronomy Engine (MIT; see its license header). */
    Useful for reflection, not professional ephemeris-grade chart work. */
 (function(){
  const SIGNS=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
@@ -339,15 +340,33 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
  Saturn:[113.6634,.000023898,2.4886,-.0000001081,339.3939,.0000297661,9.55475,.055546,-.000000009499,316.967,.0334442282]
  };
  function chart(b){
-  const time=b.time||"12:00",parts=time.split(":").map(Number),off=Number(b.offset||0),utc=new Date(b.date+"T"+String(parts[0]||0).padStart(2,"0")+":"+String(parts[1]||0).padStart(2,"0")+":00Z");utc.setUTCMinutes(utc.getUTCMinutes()-off*60);
-  const jd=utc.getTime()/86400000+2440587.5,d=jd-2451543.5,earth=helio(d,ELEM.Earth),out={};
-  for(const name of ["Mercury","Venus","Mars","Jupiter","Saturn"]){const p=helio(d,ELEM[name]),x=p[0]-earth[0],y=p[1]-earth[1];out[name]=norm(Math.atan2(y,x)/DEG)}
-  out.Sun=norm(Math.atan2(-earth[1],-earth[0])/DEG);
-  // Approximate lunar orbit; periodic perturbations improve the basic orbital solution.
-  const N=norm(125.1228-.0529538083*d),inc=5.1454,w=norm(318.0634+.1643573223*d),a=60.2666,e=.0549,M=norm(115.3654+13.0649929509*d),E=kepler(M,e),xv=a*(Math.cos(E*DEG)-e),yv=a*Math.sqrt(1-e*e)*Math.sin(E*DEG),v=Math.atan2(yv,xv)/DEG+radians(w),r=Math.sqrt(xv*xv+yv*yv),xh=r*(Math.cos(N*DEG)*Math.cos(v*DEG)-Math.sin(N*DEG)*Math.sin(v*DEG)*Math.cos(inc*DEG)),yh=r*(Math.sin(N*DEG)*Math.cos(v*DEG)+Math.cos(N*DEG)*Math.sin(v*DEG)*Math.cos(inc*DEG)),lon=norm(Math.atan2(yh,xh)/DEG);
-  const L=norm(280.46646+36000.76983*((jd-2451545)/36525)),Lm=norm(218.3165+481267.8813*((jd-2451545)/36525)),D=norm(297.8502+445267.1115*((jd-2451545)/36525)),Ms=norm(357.5291+35999.0503*((jd-2451545)/36525)),Mm=norm(134.9634+477198.8676*((jd-2451545)/36525)),F=norm(93.2721+483202.0175*((jd-2451545)/36525));
-  out.Moon=norm(lon-1.274*Math.sin((Mm-2*D)*DEG)+.658*Math.sin(2*D*DEG)-.186*Math.sin(Ms*DEG)-.059*Math.sin((2*Mm-2*D)*DEG)-.057*Math.sin((Mm-2*D+Ms)*DEG)+.053*Math.sin((Mm+2*D)*DEG)+.046*Math.sin((2*D-Ms)*DEG)+.041*Math.sin((Mm-Ms)*DEG)-.035*Math.sin(D*DEG)-.031*Math.sin((Mm+Ms)*DEG)-.015*Math.sin((2*F-2*D)*DEG)+.011*Math.sin((Mm-4*D)*DEG));
-  if(b.lat!=null&&b.lon!=null&&b.time){const T=(jd-2451545)/36525,gmst=norm(280.46061837+360.98564736629*(jd-2451545)+.000387933*T*T-T*T*T/38710000),theta=norm(gmst+Number(b.lon)),phi=Number(b.lat)*DEG,eps=23.439291-.0130042*T,asc=norm(Math.atan2(-Math.cos(theta*DEG),Math.sin(eps*DEG)*Math.tan(phi)+Math.cos(eps*DEG)*Math.sin(theta*DEG))/DEG+180);out.Ascendant=asc}
+  if(!window.Astronomy) throw new Error("The offline astronomy library did not load. Refresh the app and try again.");
+  if(!b.date) throw new Error("Please enter a valid birth date.");
+  const time=b.time||"12:00",parts=time.split(":").map(Number);
+  if(parts.length<2||!Number.isFinite(parts[0])||!Number.isFinite(parts[1])) throw new Error("Please check the birth time.");
+  const off=Number(b.offset||0);
+  if(!Number.isFinite(off)||off < -12 || off > 14) throw new Error("Please check the UTC offset.");
+  const local=new Date(b.date+"T"+String(parts[0]).padStart(2,"0")+":"+String(parts[1]).padStart(2,"0")+":00Z");
+  if(Number.isNaN(local.getTime())) throw new Error("Please enter a valid birth date.");
+  const utc=new Date(local.getTime()-off*3600000),out={};
+  const astro=window.Astronomy;
+  out.Sun=norm(astro.SunPosition(utc).elon);
+  out.Moon=norm(astro.EclipticGeoMoon(utc).lon);
+  for(const name of ["Mercury","Venus","Mars","Jupiter","Saturn"]){
+   const body=astro.Body[name];
+   if(body===undefined) throw new Error("Planetary calculation unavailable for "+name+".");
+   out[name]=norm(astro.Ecliptic(astro.GeoVector(body,utc,true)).elon);
+  }
+  // Calculate the Ascendant from local sidereal time, latitude and true ecliptic obliquity.
+  // Coordinates and the historical UTC offset must be supplied for this calculation.
+  if(b.lat!==""&&b.lat!=null&&b.lon!==""&&b.lon!=null&&b.time){
+   const lat=Number(b.lat),lon=Number(b.lon);
+   if(!Number.isFinite(lat)||lat < -90||lat > 90||!Number.isFinite(lon)||lon < -180||lon > 180) throw new Error("Please check the latitude and longitude.");
+   const jd=utc.getTime()/86400000+2440587.5,T=(jd-2451545)/36525;
+   const gmst=norm(280.46061837+360.98564736629*(jd-2451545)+.000387933*T*T-T*T*T/38710000);
+   const theta=norm(gmst+lon),phi=lat*DEG,eps=23.439291-.0130042*T;
+   out.Ascendant=norm(Math.atan2(-Math.cos(theta*DEG),Math.sin(eps*DEG)*Math.tan(phi)+Math.cos(eps*DEG)*Math.sin(theta*DEG))/DEG+180);
+  }
   return out;
  }
  const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -385,7 +404,7 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
    const asc=pos.Ascendant!=null?'<article class="planet-row"><div><strong>Ascendant</strong><p class="planet-meaning">'+descriptions.Ascendant+'</p></div><div class="planet-position">'+fmt(pos.Ascendant)+'</div></article>':'<p class="muted">Ascendant not calculated yet. Open Advanced chart settings and enter birth latitude, longitude, birth time and the UTC offset that applied at your birth.</p>';
    const sunNote=notes[sign]||"Treat this as a reflection prompt rather than a prediction.";
    const moonSign=signAt(pos.Moon);
-   result.innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR NATAL SKY · APPROXIMATE POSITIONS</div><h2>'+esc(sign)+' Sun</h2><p class="muted">'+esc(b.place||"Birthplace not entered")+' · '+esc(b.date)+(b.time?" · "+esc(b.time):" · birth time unknown")+'</p><p><strong>Sun in '+esc(sign)+':</strong> '+esc(sunNote)+'</p><p><strong>Moon in '+esc(moonSign)+':</strong> This sign is traditionally used as a lens for emotional habits and needs. Notice which parts fit your lived experience rather than treating them as fixed facts.</p><h3>Planetary placements</h3><div class="planet-grid">'+rows+asc+'</div><h3>How to read this chart</h3><p>The Sun is one part of an astrology chart, not the whole personality. The Moon is commonly read for emotional patterns; Mercury for thought and communication; Venus for values and relationships; Mars for action; Jupiter for growth; and Saturn for responsibility and boundaries.</p><p>These are symbolic interpretations from an astrological tradition, not scientifically established personality measurements or predictions. Planet positions here use an offline, low-precision calculation and can differ from professional ephemeris software.</p><div class="eyebrow" style="margin-top:18px">TODAY&#39;S REFLECTION · '+esc(dayKey)+'</div><h3>'+esc(prompts[(now.getDate()+now.getMonth()*3+sign.length)%dailyPrompts.length])+'</h3><p>'+esc(sunNote)+'</p><p><strong>Reflection:</strong> What part of this theme is genuinely useful to you today, and what does not fit?</p><button class="primary" id="refreshReport" type="button">Refresh today&#39;s reflection</button></div>';
+   result.innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR NATAL SKY · PLANETARY POSITIONS</div><h2>'+esc(sign)+' Sun</h2><p class="muted">'+esc(b.place||"Birthplace not entered")+' · '+esc(b.date)+(b.time?" · "+esc(b.time):" · birth time unknown")+'</p><p><strong>Sun in '+esc(sign)+':</strong> '+esc(sunNote)+'</p><p><strong>Moon in '+esc(moonSign)+':</strong> This sign is traditionally used as a lens for emotional habits and needs. Notice which parts fit your lived experience rather than treating them as fixed facts.</p><h3>Planetary placements</h3><div class="planet-grid">'+rows+asc+'</div><h3>How to read this chart</h3><p>The Sun is one part of an astrology chart, not the whole personality. The Moon is commonly read for emotional patterns; Mercury for thought and communication; Venus for values and relationships; Mars for action; Jupiter for growth; and Saturn for responsibility and boundaries.</p><p>These are symbolic interpretations from an astrological tradition, not scientifically established personality measurements or predictions. Planetary positions are calculated locally using Astronomy Engine. The Ascendant still depends on accurate birth time, coordinates and historical UTC offset. Astrological interpretations are symbolic, not scientifically established personality measurements or predictions.</p><div class="eyebrow" style="margin-top:18px">TODAY&#39;S REFLECTION · '+esc(dayKey)+'</div><h3>'+esc(prompts[(now.getDate()+now.getMonth()*3+sign.length)%dailyPrompts.length])+'</h3><p>'+esc(sunNote)+'</p><p><strong>Reflection:</strong> What part of this theme is genuinely useful to you today, and what does not fit?</p><button class="primary" id="refreshReport" type="button">Refresh today&#39;s reflection</button></div>';
    const refresh=document.getElementById("refreshReport");if(refresh)refresh.onclick=()=>window.neuroLabRenderChart(b);
   }catch(err){
    console.error("Astrology chart generation failed:",err);
