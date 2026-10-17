@@ -36,6 +36,14 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('x.dataset.cosmos==="stars"', self.html)
         self.assertIn('$("cosmosStars")?.classList.remove("hidden")', self.html)
 
+    def test_local_backup_and_restore_controls_are_present_and_scoped(self):
+        self.assertIn('id="exportNeuroLabData"', self.html)
+        self.assertIn('id="importNeuroLabData"', self.html)
+        self.assertIn('backup.format !== "neurolab-backup"', self.html)
+        self.assertIn('!allowedKey(key) || typeof value !== "string"', self.html)
+        self.assertIn('window.confirm("Restore this backup?', self.html)
+        self.assertIn("course-[a-z0-9_-]+", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
