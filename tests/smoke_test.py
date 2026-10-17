@@ -110,6 +110,10 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("loadLiveSun(activeSunChannel);if(typeof window.neuroLabLoadSpaceWeather", self.html)
         self.assertIn("NASA SOLAR DYNAMICS OBSERVATORY", self.html)
 
+    def test_saved_tarot_reader_scroll_syntax_is_valid(self):
+        self.assertIn('block:"start"});const btn=$("saveTarotReading")', self.html)
+        self.assertNotIn('block:"start");const btn=$("saveTarotReading")', self.html)
+
     def test_tarot_reader_lives_in_inner_cosmos_with_random_spreads(self):
         self.assertIn('id="cosmosTarot"', self.html)
         self.assertIn('data-cosmos="tarot"', self.html)
