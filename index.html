@@ -439,7 +439,7 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
   try{
    localStorage.setItem("neurolab-birth-v1",JSON.stringify(profile));
    const panel=$("innerCosmos");if(panel){document.body.classList.remove("mind-first");document.body.classList.add("cosmos-mode");$("mindHome")?.classList.add("hidden");panel.classList.remove("hidden")}
-   if(typeof makeDailyReport==="function"){makeDailyReport(profile)}
+   if(typeof window.neuroLabRenderChart==="function"){window.neuroLabRenderChart(profile)}else if(typeof makeDailyReport==="function"){makeDailyReport(profile)}
    else{
     const dateObj=new Date(date+"T12:00:00Z"),m=dateObj.getUTCMonth()+1,d=dateObj.getUTCDate();
     const bounds=[[1,20,"Aquarius"],[2,19,"Pisces"],[3,21,"Aries"],[4,20,"Taurus"],[5,21,"Gemini"],[6,21,"Cancer"],[7,23,"Leo"],[8,23,"Virgo"],[9,23,"Libra"],[10,23,"Scorpio"],[11,22,"Sagittarius"],[12,22,"Capricorn"]];
