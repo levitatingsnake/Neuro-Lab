@@ -375,6 +375,30 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
   window.scrollTo({top:0,behavior:"smooth"});
  }
  function closeCosmos(){document.body.classList.remove("cosmos-mode");document.body.classList.add("mind-first");$("innerCosmos")?.classList.add("hidden");$("mindHome")?.classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}
+
+ document.addEventListener("submit",function(e){
+  const form=e.target;if(!form||form.id!=="birthForm")return;
+  e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+  const $=id=>document.getElementById(id);
+  const date=$("birthDate")?.value||"",place=$("birthPlace")?.value.trim()||"",time=$("birthTime")?.value||"";
+  if(!date||!place){const result=$("birthResult");if(result)result.innerHTML='<p role="alert" class="feedback">Please enter your birth date and birthplace first.</p>';return}
+  const latRaw=$("birthLat")?.value??"",lonRaw=$("birthLon")?.value??"",offRaw=$("birthOffset")?.value??"";
+  if((latRaw==="")!==(lonRaw==="")){alert("Enter both latitude and longitude, or leave both blank.");return}
+  if((latRaw!==""||lonRaw!=="")&&offRaw===""){alert("Enter the UTC offset for your birth date and place, or leave all advanced settings blank.");return}
+  const profile={date,time,place,lat:latRaw===""?null:Number(latRaw),lon:lonRaw===""?null:Number(lonRaw),offset:offRaw===""?null:Number(offRaw)};
+  try{
+   localStorage.setItem("neurolab-birth-v1",JSON.stringify(profile));
+   const panel=$("innerCosmos");if(panel){document.body.classList.remove("mind-first");document.body.classList.add("cosmos-mode");$("mindHome")?.classList.add("hidden");panel.classList.remove("hidden")}
+   if(typeof makeDailyReport==="function"){makeDailyReport(profile)}
+   else{
+    const dateObj=new Date(date+"T12:00:00Z"),m=dateObj.getUTCMonth()+1,d=dateObj.getUTCDate();
+    const bounds=[[1,20,"Aquarius"],[2,19,"Pisces"],[3,21,"Aries"],[4,20,"Taurus"],[5,21,"Gemini"],[6,21,"Cancer"],[7,23,"Leo"],[8,23,"Virgo"],[9,23,"Libra"],[10,23,"Scorpio"],[11,22,"Sagittarius"],[12,22,"Capricorn"]];
+    let sign="Capricorn";bounds.forEach(([month,start,name])=>{if(m>month||(m===month&&d>=start))sign=name});
+    $("birthResult").innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR ASTROLOGY PROFILE</div><h3>'+sign+' Sun</h3><p>Birthplace: '+place.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))+'</p><p>Your birth details have been saved on this device. Reload the page if you want to retry the full chart engine.</p></div>';
+   }
+   $("birthResult")?.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }catch(err){console.error("Astrology profile submit failed",err);const result=$("birthResult");if(result)result.innerHTML='<p role="alert" class="feedback">The profile could not be saved in this browser. Please check storage settings and try again.</p>'}
+ },true);
  document.addEventListener("click",function(e){
   const target=e.target instanceof Element?e.target:null;if(!target)return;
   if(target.closest("#openCosmos")){e.preventDefault();openCosmos();return}
