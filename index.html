@@ -213,7 +213,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
  
 </section
 
-<section id="outerCosmos" class="cosmos-screen hidden"><div class="cosmos-top"><div class="brand">NEURO<span>//</span>LAB <span style="color:#ffb45c">☼ OUTER COSMOS</span></div><button type="button" class="cosmos-back" data-back-worlds>← Back to worlds</button></div><div id="cosmosSun" class="hidden">
+<section id="outerCosmos" class="cosmos-screen hidden"><div class="cosmos-top"><div class="brand">NEURO<span>//</span>LAB <span style="color:#ffb45c">☼ OUTER COSMOS</span></div><button type="button" class="cosmos-back" data-back-worlds>← Back to worlds</button></div><div id="cosmosSun">
   <div class="outer-shell">
    <div class="outer-intro"><div class="eyebrow">OUTER COSMOS · LIVE OBSERVATIONS</div><h2>The Sun is alive with motion.</h2><p class="muted">A living window into our star: its immense energy, the changing space around Earth, and the data scientists use to watch it. Look first. Explore deeper when you're ready.</p></div>
    <div class="sun-stage"><div class="sun-starfield" aria-hidden="true"></div>
@@ -230,8 +230,6 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
    <div class="space-note"><div class="eyebrow">A BIG STAR, A SMALL BLUE WORLD</div><h3>Wonder, with the science intact.</h3><p>Space weather can affect satellites, radio communications, navigation systems and, during stronger events, power infrastructure. The Sun illustration is an artistic rendering; the numbers beside it come from NOAA space-weather data when available. Solar activity is not used here to predict your mood, personality or destiny.</p><p class="muted">Data source: NOAA Space Weather Prediction Center. If observations are unavailable, the experience will say so rather than inventing a reading.</p><p><a class="space-observatory-link" href="https://www.spaceweather.gov/products/coronagraph" target="_blank" rel="noopener noreferrer">Explore real coronagraph imagery at NOAA ↗</a></p></div>
   </div>
  </div></section>
->
-
 
 <section class="mind-shell hidden" id="mindHome">
   <div class="mind-welcome"><div class="mind-orb">N</div><div class="eyebrow">A signal from a brighter tomorrow</div><h1>Become more than <em>you were yesterday.</em></h1><p>Step into a calm, intelligent space built to help you see new possibilities, understand yourself, and shape the person you are becoming. No judgement. No fixed destiny. Just a clearer horizon, one meaningful step at a time.</p></div>
@@ -699,4 +697,30 @@ document.addEventListener("submit",function(e){
  window.setTimeout(finish,3650);
 })();
 </script>
+
+<script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const urls={kp:"https://services.swpc.noaa.gov/json/planetary_k_index_1m.json",flux:"https://services.swpc.noaa.gov/json/solar-cycle/observed-solar-cycle-indices.json",forecast:"https://services.swpc.noaa.gov/json/45-day-forecast.json"};
+ function value(row,keys){for(const k of keys){if(row&&row[k]!==undefined&&row[k]!==null&&row[k]!=="")return row[k]}return null}
+ function numeric(v){const n=Number(v);return Number.isFinite(n)?n:null}
+ async function fetchRows(url){const res=await fetch(url,{cache:"no-store"});if(!res.ok)throw new Error("NOAA data request failed ("+res.status+")");const d=await res.json();return Array.isArray(d)?d:[]}
+ function latest(data,keys){for(let i=data.length-1;i>=0;i--){const v=numeric(value(data[i],keys));if(v!==null)return {value:v,row:data[i]}}return null}
+ function set(id,text){const el=$(id);if(el)el.textContent=text}
+ function timeLabel(v){if(!v)return "";const d=new Date(v);return Number.isNaN(d.getTime())?String(v):d.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short"})}
+ function kpStatus(k){if(k<3)return "Quiet geomagnetic conditions";if(k<5)return "Unsettled to active conditions";if(k<7)return "Strong geomagnetic activity";return "Geomagnetic storm range"}
+ async function load(){
+  set("spaceWeatherUpdated","Connecting to NOAA space-weather observations…");
+  const tasks=await Promise.allSettled([fetchRows(urls.kp),fetchRows(urls.flux),fetchRows(urls.forecast)]);
+  let success=0,stamps=[];
+  if(tasks[0].status==="fulfilled"){const r=latest(tasks[0].value,["kp_index","Kp","kp","estimated_kp"]);if(r){set("spaceKp",r.value.toFixed(1));set("spaceKpStatus",kpStatus(r.value));const t=value(r.row,["time_tag","time-tag","time"]);if(t)stamps.push(t);success++}else set("spaceKpStatus","No recent Kp reading available")}else set("spaceKpStatus","Live Kp data unavailable");
+  if(tasks[1].status==="fulfilled"){const data=tasks[1].value;let r=latest(data,["f10.7","f107","flux","F10.7"]);if(!r&&data.length&&Array.isArray(data[0])){const head=data[0].map(x=>String(x).toLowerCase()),j=head.findIndex(x=>x.includes("f10.7")||x.includes("f107")),ti=head.findIndex(x=>x.includes("time"));if(j>=0){for(let i=data.length-1;i>0;i--){const v=numeric(data[i][j]);if(v!==null){r={value:v,row:{fluxTime:ti>=0?data[i][ti]:null}};break}}}}if(r){set("spaceFlux",Math.round(r.value));set("spaceFluxStatus","Observed solar radio flux");const t=value(r.row,["time_tag","time-tag","time","fluxTime"]);if(t)stamps.push(t);success++}else set("spaceFluxStatus","No recent flux reading available")}else set("spaceFluxStatus","Live solar flux unavailable");
+  if(tasks[2].status==="fulfilled"){const data=tasks[2].value;let r=latest(data,["kp","Kp","kp_index","predicted_kp"]);if(!r&&data.length&&Array.isArray(data[0])){const head=data[0].map(x=>String(x).toLowerCase()),j=head.findIndex(x=>x==="kp"||x.includes("k-index")||x.includes("kp forecast")),ti=head.findIndex(x=>x.includes("time"));if(j>=0){const future=data.slice(1).filter(row=>row&&row[ti]&&new Date(row[ti])>new Date()),pool=future.length?future:data.slice(1);for(const row of pool){const v=numeric(row[j]);if(v!==null&&(!r||v>r.value))r={value:v,row:{forecastTime:row[ti]}}}}}if(r){set("spaceForecast",r.value.toFixed(1));set("spaceForecastStatus","Peak value in the available forecast window");const t=value(r.row,["time_tag","time-tag","time","forecastTime"]);if(t)set("spaceForecastDetail","Forecast value from NOAA"+(t?" · "+timeLabel(t):"")+". Forecasts change as new observations arrive.");success++}else set("spaceForecastStatus","Forecast not available in the returned data")}else set("spaceForecastStatus","NOAA forecast unavailable");
+  if(success)set("spaceWeatherUpdated","NOAA observations updated"+(stamps.length?" · latest data "+timeLabel(stamps.sort().at(-1)):"")+".");else set("spaceWeatherUpdated","NOAA data could not be reached. Check your connection and try again.");
+ }
+ window.neuroLabLoadSpaceWeather=function(){return load().catch(err=>{console.error("Outer Cosmos data error",err);set("spaceWeatherUpdated","Space-weather data is temporarily unavailable. The Sun animation remains an artistic visualization.")})};
+ document.addEventListener("click",function(e){const t=e.target instanceof Element?e.target.closest("#refreshSpaceWeather"):null;if(t){t.disabled=true;window.neuroLabLoadSpaceWeather().finally(()=>{t.disabled=false})}});
+})();
+</script>
+
 </body></html>
