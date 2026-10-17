@@ -127,6 +127,17 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("Egyptian-inspired mythic lens", self.html)
         self.assertIn("Thoth tradition", self.html)
 
+    def test_tarot_saved_archive_is_local_and_included_in_backup(self):
+        self.assertIn('id="tarotSavedList"', self.html)
+        self.assertIn('id="saveTarotReading"', self.html)
+        self.assertIn("function loadSavedTarot()", self.html)
+        self.assertIn("function saveTarotSnapshot()", self.html)
+        self.assertIn("function openSavedTarot(id)", self.html)
+        self.assertIn("function deleteSavedTarot(id)", self.html)
+        self.assertIn('localStorage.setItem("neurolab-tarot-saved-v1"', self.html)
+        self.assertIn("neurolab-tarot-saved-v1|report-date", self.html)
+        self.assertIn("saved.slice(0,10)", self.html)
+
     def test_outer_cosmos_has_mission_control_navigation(self):
         self.assertIn('id="outerMissionControl"', self.html)
         self.assertIn('data-observatory-target="cosmosSun"', self.html)
