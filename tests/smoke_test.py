@@ -56,19 +56,23 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('window.confirm("Restore this backup?', self.html)
         self.assertIn("course-[a-z0-9_-]+", self.html)
 
-    def test_backup_is_inside_mind_training_and_preserves_cycle_settings(self):
+    def test_backup_controls_are_available_and_preserve_cycle_settings(self):
         mind_start = self.html.index('id="mindHome"')
         mind_end = self.html.index("</section>", mind_start)
         backup_pos = self.html.index('id="dataBackup"')
-        self.assertLess(mind_start, backup_pos)
-        self.assertLess(backup_pos, mind_end)
+        self.assertLess(mind_start, mind_end)
+        self.assertGreater(backup_pos, mind_end)
+        backup_end = self.html.index("</section>", backup_pos)
+        backup = self.html[backup_pos:backup_end]
+        self.assertIn('id="exportNeuroLabData"', backup)
+        self.assertIn('id="importNeuroLabData"', backup)
         self.assertIn("cycle-v1", self.html)
 
     def test_mind_training_saves_practice_followups_and_reflections(self):
         self.assertIn('id="mindPracticeHistory"', self.html)
         self.assertIn("mindState.followUps.push(entry)", self.html)
         self.assertIn("entry.reflection=document.getElementById", self.html)
-        self.assertIn("renderMindHistory();if(mindState.step", self.html)
+        self.assertIn("saveMind();renderMindHistory(); replies.innerHTML=", self.html)
 
     def test_mind_progress_insights_use_saved_checkin_counts(self):
         self.assertIn('id="mindProgressInsights"', self.html)
@@ -151,7 +155,8 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('pattern="Several "+dominantSuit[0]+" cards recur, bringing "', self.html)
         self.assertIn("12:[[2,1],[3,1],[4,1],[5,2],[5,3],[5,4],[4,5],[3,5],[2,5],[1,4],[1,3],[1,2]]", self.html)
         self.assertIn("7:[[1,3],[1,2],[2,1],[3,1],[4,2],[4,3],[2,3]]", self.html)
-        self.assertIn("spreadIntros", self.html)
+        self.assertIn("const tarotLayouts=", self.html)
+        self.assertIn('pattern="Several "+dominantSuit[0]+" cards recur, bringing "', self.html)
         self.assertIn("spread-12", self.html)
         self.assertIn("@keyframes tarot-console-scan", self.html)
         self.assertIn("@keyframes tarot-button-sweep", self.html)
@@ -172,7 +177,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('target.closest(".world-choice[data-world]")', self.html)
         self.assertIn('target.closest("#closeCosmos")', self.html)
         worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
-        self.assertIn('const CACHE = "neurolab-shell-v44"', worker)
+        self.assertIn('const CACHE = "neurolab-shell-v45"', worker)
 
     def test_outer_cosmos_has_mission_control_navigation(self):
         self.assertIn('id="outerMissionControl"', self.html)
