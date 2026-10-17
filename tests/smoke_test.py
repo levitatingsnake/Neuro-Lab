@@ -131,7 +131,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("const tarotLayouts=", self.html)
         self.assertIn("function tarotSynthesisText(", self.html)
         self.assertIn("dominantSuit", self.html)
-        self.assertIn("Several "+'Wands'+" cards recur", self.html)
+        self.assertIn('pattern="Several "+dominantSuit[0]+" cards recur, bringing "', self.html)
         self.assertIn("12:[[2,1],[3,1],[4,1],[5,2],[5,3],[5,4],[4,5],[3,5],[2,5],[1,4],[1,3],[1,2]]", self.html)
         self.assertIn("7:[[1,3],[1,2],[2,1],[3,1],[4,2],[4,3],[2,3]]", self.html)
         self.assertIn("spreadIntros", self.html)
