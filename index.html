@@ -1146,4 +1146,49 @@ textarea{resize:vertical}
   });
 })();
 </script>
+
+<script>
+/* Last-resort world navigation: independent of the larger application initialisers. */
+(function(){
+  const byId=id=>document.getElementById(id);
+  function landing(){
+    document.body.classList.remove("cosmos-mode","mind-first");
+    document.body.classList.add("world-picker-mode");
+    byId("worldLanding")?.classList.remove("hidden");
+    ["innerCosmos","outerCosmos","mindHome"].forEach(id=>byId(id)?.classList.add("hidden"));
+    window.scrollTo(0,0);
+  }
+  function enter(kind){
+    const landingPanel=byId("worldLanding");
+    const target=byId(kind==="inner"?"innerCosmos":"outerCosmos");
+    if(!target)return;
+    if(landingPanel?.classList.contains("hidden")&&!target.classList.contains("hidden"))return;
+    landingPanel?.classList.add("hidden");
+    byId("innerCosmos")?.classList.add("hidden");
+    byId("outerCosmos")?.classList.add("hidden");
+    byId("mindHome")?.classList.add("hidden");
+    document.body.classList.remove("world-picker-mode","mind-first");
+    if(kind==="inner"){
+      document.body.classList.add("cosmos-mode");
+      target.classList.remove("hidden");
+      document.querySelectorAll("[data-cosmos]").forEach(tab=>tab.classList.toggle("active",tab.dataset.cosmos==="stars"));
+      byId("cosmosStars")?.classList.remove("hidden");
+      ["cosmosLibrary","cosmosCycle","cosmosTarot"].forEach(id=>byId(id)?.classList.add("hidden"));
+      try{if(typeof window.renderBirth==="function")window.renderBirth()}catch(error){console.error("Birth chart initialisation failed",error)}
+    }else{
+      target.classList.remove("hidden");
+      if(byId("spaceWeatherUpdated"))byId("spaceWeatherUpdated").textContent="Refreshing live space observations…";
+      window.requestAnimationFrame(()=>{try{if(typeof window.neuroLabLoadSpaceWeather==="function")window.neuroLabLoadSpaceWeather()}catch(error){console.error("Outer Cosmos refresh failed",error)}});
+    }
+    window.scrollTo(0,0);
+  }
+  document.addEventListener("click",function(event){
+    const target=event.target instanceof Element?event.target:null;if(!target)return;
+    const choice=target.closest(".world-choice[data-world]");
+    if(choice){const kind=choice.dataset.world;if(kind==="inner"||kind==="outer"){if(!byId(kind==="inner"?"innerCosmos":"outerCosmos")?.classList.contains("hidden"))return;event.preventDefault();enter(kind)}return}
+    if(target.closest("#closeCosmos")||target.closest("[data-back-worlds]")){event.preventDefault();landing()}
+  },true);
+  landing();
+})();
+</script>
 </body></html>
