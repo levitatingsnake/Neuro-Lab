@@ -169,6 +169,11 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 @media(max-width:480px){.launch-portal{width:min(70vw,240px)}.launch-caption{font-size:.6rem;letter-spacing:.16em}}
 
 
+/* Emergency first-screen recovery: never leave the launch sequence or landing page visually stranded. */
+#launchSequence{z-index:99999}
+#worldLanding:not(.hidden){display:block!important;visibility:visible!important;opacity:1!important}
+#worldLanding:not(.hidden) .world-landing-head,
+#worldLanding:not(.hidden) .world-choice-grid{visibility:visible!important;opacity:1!important}
 /* Boot safety: after the launch animation, show the world selector only until a world is chosen. */
 body:not(.cosmos-mode):not(.mind-first):not(.outer-cosmos-mode) .shell>:not(#worldLanding):not(.top){display:none!important}
 #worldLanding{position:relative;z-index:2;min-height:55vh}
