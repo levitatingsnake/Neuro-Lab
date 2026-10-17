@@ -169,6 +169,12 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 @media(max-width:480px){.launch-portal{width:min(70vw,240px)}.launch-caption{font-size:.6rem;letter-spacing:.16em}}
 
 
+/* Hard world boundaries: only the active world is visible inside the app shell. */
+body.cosmos-mode .shell>:not(#innerCosmos),
+body.outer-cosmos-mode .shell>:not(#outerCosmos),
+body.mind-first .shell>:not(#mindHome):not(.top){display:none!important}
+body.outer-cosmos-mode .shell{max-width:1040px}
+body.outer-cosmos-mode .top{display:none!important}
 /* Mind Training is a first-class Inner Cosmos experience, not a stray navigation link. */
 .mind-integration{display:grid;grid-template-columns:76px minmax(0,1fr) auto;align-items:center;gap:18px;margin:0 0 22px;padding:22px;border:1px solid rgba(184,164,255,.3);border-radius:20px;background:radial-gradient(ellipse at 0% 50%,rgba(110,91,205,.22),transparent 58%),linear-gradient(125deg,rgba(17,25,45,.96),rgba(14,22,34,.96));box-shadow:0 12px 36px rgba(0,0,0,.18)}
 .mind-integration-orb{display:grid;place-items:center;width:68px;height:68px;border-radius:50%;font-size:2rem;color:#d5cbff;background:radial-gradient(circle at 35% 30%,#51477e,#171c36 66%);border:1px solid rgba(197,183,255,.55);box-shadow:0 0 0 7px rgba(184,164,255,.055),0 0 30px rgba(156,133,255,.18)}
