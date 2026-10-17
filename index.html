@@ -606,27 +606,33 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
 (function(){
  const get=id=>document.getElementById(id),set=(id,value)=>{const el=get(id);if(el)el.textContent=value};
  async function json(url){const response=await fetch(url,{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);return response.json()}
- const rows=x=>Array.isArray(x)?x:[];
+ function records(payload){
+  if(!Array.isArray(payload)||!payload.length)return [];
+  if(Array.isArray(payload[0])){
+   const keys=payload[0];return payload.slice(1).map(row=>Object.fromEntries(keys.map((key,i)=>[String(key),row[i]])));
+  }
+  return payload.filter(row=>row&&typeof row==="object"&&!Array.isArray(row));
+ }
+ function field(row,pattern){const key=Object.keys(row||{}).find(k=>pattern.test(k));return key?row[key]:undefined}
  const when=value=>{const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleString(undefined,{dateStyle:"medium",timeStyle:"short",timeZone:"UTC"})+" UTC"};
- function kpDescription(v){if(v<2)return "Quiet geomagnetic conditions";if(v<4)return "Unsettled to active conditions";if(v<5)return "Minor storm threshold";if(v<6)return "Moderate storm threshold";if(v<7)return "Strong storm threshold";return "Severe storm range"}
+ function kpDescription(v){if(v<2)return "Quiet geomagnetic conditions";if(v<4)return "Unsettled to active conditions";if(v<5)return "Below geomagnetic-storm threshold";if(v<6)return "G1 minor storm range";if(v<7)return "G2 moderate storm range";if(v<8)return "G3 strong storm range";if(v<9)return "G4 severe storm range";return "G5 extreme storm range"}
  async function load(){
   set("spaceWeatherUpdated","Connecting to NOAA observations…");
   const results=await Promise.allSettled([json("https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json"),json("https://services.swpc.noaa.gov/products/10cm-flux-30-day.json"),json("https://services.swpc.noaa.gov/products/noaa-planetary-k-index-forecast.json")]);
   let count=0,latest="";
   if(results[0].status==="fulfilled"){
-   const data=rows(results[0].value),head=data[0]||[],ti=head.indexOf("time_tag"),ki=head.indexOf("Kp"),valid=data.slice(1).filter(row=>row&&ti>=0&&ki>=0&&row[ti]&&Number.isFinite(Number(row[ki]))),last=valid[valid.length-1];
-   if(last){const v=Number(last[ki]);set("spaceKp",v.toFixed(1));set("spaceKpStatus",kpDescription(v));latest=when(last[ti]);count++}else set("spaceKpStatus","No usable Kp reading in response")
+   const data=records(results[0].value),valid=data.map(row=>({time:field(row,/^time_tag$|time/i),kp:field(row,/^kp$/i)})).filter(row=>row.time!=null&&Number.isFinite(Number(row.kp))),last=valid[valid.length-1];
+   if(last){const v=Number(last.kp);set("spaceKp",v.toFixed(1));set("spaceKpStatus",kpDescription(v));latest=when(last.time);count++}else set("spaceKpStatus","No usable Kp reading in response")
   }else set("spaceKpStatus","Observation currently unavailable");
   if(results[1].status==="fulfilled"){
-   const data=rows(results[1].value),head=data[0]||[],ti=head.indexOf("time_tag"),fi=head.findIndex(x=>String(x).toLowerCase().includes("flux")),valid=data.slice(1).filter(row=>row&&ti>=0&&fi>=0&&row[ti]&&Number.isFinite(Number(row[fi]))),last=valid[valid.length-1];
-   if(last){set("spaceFlux",Math.round(Number(last[fi])));set("spaceFluxStatus","Latest reported 10.7 cm solar radio flux");if(!latest)latest=when(last[ti]);count++}else set("spaceFluxStatus","No usable solar-flux reading in response")
+   const data=records(results[1].value),valid=data.map(row=>({time:field(row,/^time_tag$|time/i),flux:field(row,/flux|f10.?7/i)})).filter(row=>row.time!=null&&Number.isFinite(Number(row.flux))),last=valid[valid.length-1];
+   if(last){set("spaceFlux",Math.round(Number(last.flux)));set("spaceFluxStatus","Latest reported 10.7 cm solar radio flux");if(!latest)latest=when(last.time);count++}else set("spaceFluxStatus","No usable solar-flux reading in response")
   }else set("spaceFluxStatus","Observation currently unavailable");
   if(results[2].status==="fulfilled"){
-   const data=rows(results[2].value),head=data[0]||[],ti=head.findIndex(x=>String(x).toLowerCase().includes("time")),ki=head.findIndex(x=>String(x).toLowerCase().includes("kp"));
-   const valid=data.slice(1).filter(row=>row&&ti>=0&&ki>=0&&row[ti]&&Number.isFinite(Number(row[ki])));
-   const now=Date.now(),future=valid.filter(row=>{const t=Date.parse(row[ti]);return Number.isFinite(t)&&t>=now-3600000});
+   const data=records(results[2].value),valid=data.map(row=>({time:field(row,/^time_tag$|time/i),kp:field(row,/^kp$/i)})).filter(row=>row.time!=null&&Number.isFinite(Number(row.kp)));
+   const now=Date.now(),future=valid.filter(row=>{const t=Date.parse(row.time);return Number.isFinite(t)&&t>=now-3600000});
    const last=(future.length?future:valid).slice(-1)[0];
-   if(last){const v=Number(last[ki]);set("spaceForecast",v.toFixed(1));set("spaceForecastStatus",v>=5?"Forecast reaches geomagnetic-storm levels":v>=4?"Active geomagnetic conditions forecast":"Quiet to unsettled conditions forecast");set("spaceForecastDetail","Forecast time: "+when(last[ti])+". This is an estimate, not a guarantee.");}
+   if(last){const v=Number(last.kp);set("spaceForecast",v.toFixed(1));set("spaceForecastStatus",v>=5?"Forecast reaches geomagnetic-storm levels":v>=4?"Active geomagnetic conditions forecast":"Quiet to unsettled conditions forecast");set("spaceForecastDetail","Forecast time: "+when(last.time)+". This is an estimate, not a guarantee.");}
    else set("spaceForecastStatus","No usable forecast reading returned");
   }else set("spaceForecastStatus","Forecast currently unavailable");
   set("spaceWeatherUpdated",count?"Latest observation: "+latest+" · Source: NOAA SWPC":"Live observations could not be loaded. Check your connection and try again.")
