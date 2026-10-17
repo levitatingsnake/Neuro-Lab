@@ -333,6 +333,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 <section class="panel hidden" id="missionPanel" aria-live="polite"></section>
 <section class="panel hidden" id="viewGoals"><div class="eyebrow">Long game</div><h2>Personal objectives</h2><p class="muted">Keep goals small enough to act on, meaningful enough to matter.</p><form id="goalForm"><label class="field"><span>New objective</span><input id="goalInput" maxlength="120" placeholder="e.g. Pause before reacting" required></label><button type="submit" class="primary">Add objective</button></form><div id="goals"></div></section>
 <section class="panel hidden" id="viewNotes"><div class="eyebrow">Reflection log</div><h2>Field notes</h2><p class="muted">Capture what happened, what you noticed, and what you want to try next.</p><form id="noteForm"><label class="field"><span>Today's observation</span><textarea id="noteInput" maxlength="1200" placeholder="What did you notice about your thoughts, emotions or actions?" required></textarea></label><button type="submit" class="primary">Save field note</button></form><div id="notes"></div></section>
+<section class="panel" id="dataBackup"><div class="eyebrow">KEEP YOUR PROGRESS</div><h2>Backup &amp; restore</h2><p class="muted">Your progress lives in this browser. Download a backup so you can keep a copy before clearing browser data or changing devices.</p><div class="cycle-actions"><button type="button" class="primary" id="exportNeuroLabData">Download my backup</button><label class="field"><span>Restore from a backup file</span><input type="file" id="importNeuroLabData" accept="application/json,.json"></label></div><p class="muted" id="backupFeedback" role="status" aria-live="polite">Backups stay on your device unless you choose to share the file.</p></section>
 <p class="notice">This is a self-development prototype, not a diagnostic tool or a substitute for professional mental-health care. Progress is stored locally in this browser. Clearing site data may erase it.</p>
 <footer class="footer">NEURO//LAB · Build awareness. Run experiments. Keep what works.</footer>
 </main>
@@ -923,4 +924,72 @@ textarea{resize:vertical}
 })();
 </script>
 
+<script>
+/* Local-only backup and restore for NEURO//LAB data. */
+(function(){
+  const allowedKey = key => /^neurolab-(?:state|mind-v1|birth-v1|cycle-v1|report-date|course-[a-z0-9_-]+)$/.test(key);
+  const feedback = document.getElementById("backupFeedback");
+  const exportButton = document.getElementById("exportNeuroLabData");
+  const importInput = document.getElementById("importNeuroLabData");
+  if (!exportButton || !importInput || !feedback) return;
+  exportButton.addEventListener("click", function(){
+    try {
+      const data = {};
+      for (let i=0; i<localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && allowedKey(key)) data[key] = localStorage.getItem(key);
+      }
+      const backup = {format:"neurolab-backup", version:1, createdAt:new Date().toISOString(), data};
+      const blob = new Blob([JSON.stringify(backup, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "neurolab-backup-" + new Date().toISOString().slice(0,10) + ".json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 1000);
+      feedback.textContent = "Backup prepared. Keep the downloaded JSON file somewhere safe.";
+    } catch (error) {
+      console.error("NEURO//LAB backup failed", error);
+      feedback.textContent = "Backup could not be created. Check browser storage and try again.";
+    }
+  });
+  importInput.addEventListener("change", async function(){
+    const file = importInput.files && importInput.files[0];
+    if (!file) return;
+    try {
+      if (file.size > 5 * 1024 * 1024) throw new Error("Backup file is larger than 5 MB.");
+      const backup = JSON.parse(await file.text());
+      if (!backup || backup.format !== "neurolab-backup" || backup.version !== 1 ||
+          !backup.data || typeof backup.data !== "object" || Array.isArray(backup.data)) {
+        throw new Error("This does not look like a supported NEURO//LAB backup.");
+      }
+      const entries = Object.entries(backup.data);
+      if (entries.some(([key, value]) => !allowedKey(key) || typeof value !== "string")) {
+        throw new Error("The backup contains unsupported data. Nothing was changed.");
+      }
+      if (!window.confirm("Restore this backup? Current NEURO//LAB progress on this browser will be replaced.")) {
+        feedback.textContent = "Restore cancelled. Your current data is unchanged.";
+        importInput.value = "";
+        return;
+      }
+      const removeKeys = [];
+      for (let i=0; i<localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && allowedKey(key)) removeKeys.push(key);
+      }
+      removeKeys.forEach(key=>localStorage.removeItem(key));
+      entries.forEach(([key, value])=>localStorage.setItem(key, value));
+      feedback.textContent = "Backup restored. Reloading NEURO//LAB…";
+      window.location.reload();
+    } catch (error) {
+      console.error("NEURO//LAB restore failed", error);
+      feedback.textContent = error instanceof SyntaxError ? "That file is not valid JSON." : (error.message || "Restore failed.");
+    } finally {
+      importInput.value = "";
+    }
+  });
+})();
+</script>
 </body></html>
