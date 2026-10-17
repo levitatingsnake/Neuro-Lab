@@ -129,6 +129,11 @@ class NeuroLabSmokeTests(unittest.TestCase):
         for spread in ('value="4"', 'value="6"', 'value="7"', 'value="9"', 'value="12"'):
             self.assertIn(spread, self.html)
         self.assertIn("const tarotLayouts=", self.html)
+        self.assertIn("function tarotSynthesisText(", self.html)
+        self.assertIn("dominantSuit", self.html)
+        self.assertIn("Several "+'Wands'+" cards recur", self.html)
+        self.assertIn("12:[[2,1],[3,1],[4,1],[5,2],[5,3],[5,4],[4,5],[3,5],[2,5],[1,4],[1,3],[1,2]]", self.html)
+        self.assertIn("7:[[1,3],[1,2],[2,1],[3,1],[4,2],[4,3],[2,3]]", self.html)
         self.assertIn("spreadIntros", self.html)
         self.assertIn("spread-12", self.html)
         self.assertIn("@keyframes tarot-console-scan", self.html)
