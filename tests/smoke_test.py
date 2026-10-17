@@ -114,6 +114,14 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('block:"start"});const btn=$("saveTarotReading")', self.html)
         self.assertNotIn('block:"start");const btn=$("saveTarotReading")', self.html)
 
+    def test_tarot_uses_original_svg_artwork_and_refined_layout(self):
+        self.assertIn("function tarotCardArtwork(card,deckInfo,reversed)", self.html)
+        self.assertIn('class="tarot-card-artwork"', self.html)
+        self.assertIn('class="tarot-spread-stage"', self.html)
+        self.assertIn('class="tarot-interpretation-list"', self.html)
+        self.assertIn(".tarot-card-spread.spread-10 .tarot-card-entry:nth-child(2)", self.html)
+        self.assertIn("@media(max-width:700px)", self.html)
+
     def test_tarot_reader_lives_in_inner_cosmos_with_random_spreads(self):
         self.assertIn('id="cosmosTarot"', self.html)
         self.assertIn('data-cosmos="tarot"', self.html)
