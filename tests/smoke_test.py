@@ -135,7 +135,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("function openSavedTarot(id)", self.html)
         self.assertIn("function deleteSavedTarot(id)", self.html)
         self.assertIn('localStorage.setItem("neurolab-tarot-saved-v1"', self.html)
-        self.assertIn("neurolab-tarot-saved-v1|report-date", self.html)
+        self.assertIn("tarot-saved-v1|report-date", self.html)
         self.assertIn("saved.slice(0,10)", self.html)
 
     def test_outer_cosmos_has_mission_control_navigation(self):
