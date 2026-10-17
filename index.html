@@ -141,12 +141,29 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 <section id="innerCosmos" class="cosmos-screen hidden">
  <div class="cosmos-top"><div class="brand">NEURO<span>//</span>LAB <span style="color:#b8a4ff">✦ COSMOS</span></div><button id="closeCosmos" class="cosmos-back" type="button" onclick="(function(){document.body.classList.remove('cosmos-mode');document.body.classList.add('mind-first');var p=document.getElementById('innerCosmos'),h=document.getElementById('mindHome');if(p)p.classList.add('hidden');if(h)h.classList.remove('hidden');window.scrollTo(0,0)})()">← Back to Mind</button></div>
  <div class="cosmos-hero"><div class="eyebrow" style="color:#c5b7ff">INNER COSMOS · EXPLORE & REFLECT</div><h1>Explore the stories<br>humans tell about being human.</h1><p>Build a personal astrology reflection, or travel through spiritual and philosophical traditions in small, game-like lessons. Curious, respectful, and made for learning.</p></div>
- <div class="cosmos-tabs"><button class="cosmos-tab active" data-cosmos="stars">✦ Birth chart</button><button class="cosmos-tab" data-cosmos="library">◈ Wisdom library</button></div>
+ <div class="cosmos-tabs"><button class="cosmos-tab active" data-cosmos="stars">✦ Birth chart</button><button class="cosmos-tab" data-cosmos="library">◈ Wisdom library</button><button class="cosmos-tab" data-cosmos="cycle">✿ Cycle &amp; wellbeing</button></div>
  <div id="cosmosStars">
   <div class="cosmos-card"><h2>Your birth details</h2><p class="muted">Add your details once. Your profile stays in this browser.</p><form id="birthForm"><div class="cosmos-formgrid"><label class="field">Birth date<input id="birthDate" type="date" required></label><label class="field">Birth time<input id="birthTime" type="time"></label></div><label class="field">Birthplace (town/city and country)<input id="birthPlace" maxlength="100" placeholder="e.g. Wellington, New Zealand" required></label><details class="coordinate-details"><summary>Advanced chart settings</summary><p class="muted">For the Ascendant, enter coordinates and the UTC offset that applied at your birth. Daylight saving and historical time zones can change this offset.</p><div class="cosmos-formgrid"><label class="field">Latitude<input id="birthLat" type="number" min="-90" max="90" step="any" placeholder="-41.2865"></label><label class="field">Longitude<input id="birthLon" type="number" min="-180" max="180" step="any" placeholder="174.7762"></label><label class="field">UTC offset (hours)<input id="birthOffset" type="number" min="-12" max="14" step="0.25" placeholder="12"></label></div></details><button class="primary" type="button" id="createAstrologyProfile" onclick="(function(){var $=function(id){return document.getElementById(id)},date=$('birthDate').value,place=$('birthPlace').value.trim(),time=$('birthTime').value,lat=$('birthLat').value,lon=$('birthLon').value,offset=$('birthOffset').value,result=$('birthResult');if(!date||!place){if(result)result.innerHTML='<p role=&quot;alert&quot; class=&quot;feedback&quot;>Please enter your birth date and birthplace first.</p>';return}if((lat==='')!==(lon==='')){alert('Enter both latitude and longitude, or leave both blank.');return}if((lat!==''||lon!=='')&&offset===''){alert('Enter the UTC offset, or leave all advanced settings blank.');return}var b={date:date,time:time,place:place,lat:lat===''?null:Number(lat),lon:lon===''?null:Number(lon),offset:offset===''?null:Number(offset)};try{localStorage.setItem('neurolab-birth-v1',JSON.stringify(b));document.body.classList.remove('mind-first');document.body.classList.add('cosmos-mode');$('mindHome').classList.add('hidden');$('innerCosmos').classList.remove('hidden');if(typeof window.neuroLabRenderChart==='function')window.neuroLabRenderChart(b);else if(typeof makeDailyReport==='function')makeDailyReport(b);else if(result)result.innerHTML='<div class=&quot;cosmos-result&quot;><h3>Birth profile saved</h3><p>Your details are saved on this device. Please reopen Inner Cosmos to retry the chart.</p></div>';if(result)result.scrollIntoView({behavior:'smooth',block:'nearest'})}catch(e){console.error('Astrology profile:',e);if(result)result.innerHTML='<p role=&quot;alert&quot; class=&quot;feedback&quot;>Could not save profile in this browser. Please try again.</p>'}})()">Create my astrology profile ✧</button></form><div id="birthResult"></div></div>
  </div>
  <div id="cosmosLibrary" class="hidden"><div class="cosmos-card"><h2>The wisdom library</h2><p class="muted">Choose a 30-day journey. Each day unlocks a short lesson, a reflection and a small XP reward. Learn traditions on their own terms, without treating living religions as just a self-help toolkit.</p><div id="courseGrid" class="course-grid"></div><div id="courseDetail"></div></div></div>
- <p class="mind-privacy">Astrology is presented as a cultural and reflective practice, not a scientifically validated way to predict personality or events. This first version calculates the Sun sign from birth date; it does not yet calculate astronomical Moon or Ascendant placements. Daily reflections refresh by calendar date.</p>
+ <p class="mind-privacy">Astrology is presented as a cultural and reflective practice, not a scientifically validated way to predict personality or events. Planetary positions are calculated locally; the Ascendant requires accurate birth time, coordinates and historical UTC offset. Daily reflections refresh by calendar date.</p>
+
+ <div id="cosmosCycle" class="hidden">
+  <div class="cycle-shell">
+   <div class="cycle-heading"><div class="eyebrow">YOUR RHYTHM · YOUR WAY</div><h2>A softer kind of tracking.</h2><p class="muted">Notice your cycle without turning it into a set of rules. Your phase colours shift with your estimated cycle day. Every body is different, and your lived experience comes first.</p></div>
+   <div id="cyclePhaseCard" class="cycle-phase-card phase-menstrual">
+    <div class="cycle-phase-kicker" id="cyclePhaseKicker">YOUR CURRENT CHAPTER</div><div class="cycle-phase-title" id="cyclePhaseTitle">Your rhythm begins here</div><div class="cycle-phase-subtitle" id="cyclePhaseSubtitle">Add the first day of your last period to personalise this space.</div>
+    <div class="cycle-orbit" aria-hidden="true"><div class="cycle-orbit-ring"></div><div class="cycle-orbit-core">✦</div></div>
+    <div class="cycle-day" id="cycleDayLabel">Cycle day not set</div>
+   </div>
+   <div class="cycle-form-card"><h3>Your cycle settings</h3><p class="muted">Only stored on this device in this first version. Nothing is sent to a server.</p>
+    <label class="field">First day of your most recent period<input id="cycleLastPeriod" type="date"></label>
+    <div class="cycle-input-grid"><label class="field">Typical cycle length (days)<input id="cycleLength" type="number" min="15" max="60" value="28"></label><label class="field">Typical period length (days)<input id="cyclePeriodLength" type="number" min="1" max="15" value="5"></label></div>
+    <div class="cycle-actions"><button class="primary" type="button" id="saveCycleSettings">Save my settings</button><button class="cycle-secondary" type="button" id="logPeriodToday">Period started today</button></div><p id="cycleFeedback" class="muted cycle-feedback" aria-live="polite"></p>
+   </div>
+   <div class="cycle-note-card"><div class="eyebrow">A NOTE FROM NEURO//LAB</div><h3>Use the colours as an invitation, not a verdict.</h3><p>Cycle phases and timing are estimates based on the dates and averages you enter. They cannot confirm ovulation, explain every mood or symptom, or be relied on for contraception. You can track what you actually experience over time, and ignore anything that does not fit.</p><p class="muted">Your body is not a productivity schedule. Rest, energy, desire and mood can vary for many reasons.</p></div>
+  </div>
+ </div>
 </section>
 
 <section class="mind-shell" id="mindHome">
@@ -471,8 +488,84 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
   const target=e.target instanceof Element?e.target:null;if(!target)return;
   if(target.closest("#openCosmos")){e.preventDefault();openCosmos();return}
   if(target.closest("#closeCosmos")){e.preventDefault();closeCosmos();return}
-  const tab=target.closest("[data-cosmos]");if(tab){document.querySelectorAll("[data-cosmos]").forEach(x=>x.classList.toggle("active",x===tab));const stars=tab.dataset.cosmos==="stars";$("cosmosStars")?.classList.toggle("hidden",!stars);$("cosmosLibrary")?.classList.toggle("hidden",stars)}
+  const tab=target.closest("[data-cosmos]");if(tab){document.querySelectorAll("[data-cosmos]").forEach(x=>x.classList.toggle("active",x===tab));const view=tab.dataset.cosmos;$("cosmosStars")?.classList.toggle("hidden",view!=="stars");$("cosmosLibrary")?.classList.toggle("hidden",view!=="library");$("cosmosCycle")?.classList.toggle("hidden",view!=="cycle")}
  },true);
+})();
+</script>
+
+<style>
+/* NEURO//LAB Cycle & Wellbeing: phase-responsive colours, built for calm and agency. */
+.cycle-shell{max-width:850px;margin:24px auto 48px;display:grid;gap:18px}
+.cycle-heading h2{font-size:clamp(1.8rem,5vw,2.6rem);margin:8px 0}
+.cycle-heading p{max-width:650px;line-height:1.65}
+.cycle-phase-card{position:relative;overflow:hidden;isolation:isolate;border:1px solid rgba(255,255,255,.14);border-radius:26px;padding:26px;min-height:245px;background:linear-gradient(135deg,#512f4b,#9b627e 60%,#d9a3b0);color:#fff;transition:background .5s ease}
+.cycle-phase-card:before{content:"";position:absolute;z-index:-1;width:250px;height:250px;border-radius:50%;right:-65px;top:-80px;background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,0) 70%)}
+.cycle-phase-kicker{font-size:.72rem;letter-spacing:.17em;font-weight:700;opacity:.82}
+.cycle-phase-title{font-size:clamp(1.65rem,5vw,2.5rem);font-weight:650;max-width:65%;line-height:1.1;margin:18px 0 10px}
+.cycle-phase-subtitle{max-width:62%;line-height:1.55;opacity:.92}
+.cycle-day{margin-top:22px;font-size:.83rem;font-weight:650;letter-spacing:.04em}
+.cycle-orbit{position:absolute;right:26px;top:50%;transform:translateY(-42%);width:125px;height:125px;display:grid;place-items:center}
+.cycle-orbit-ring{position:absolute;inset:0;border:1px solid rgba(255,255,255,.48);border-radius:50%;box-shadow:0 0 0 12px rgba(255,255,255,.05),0 0 0 26px rgba(255,255,255,.035)}
+.cycle-orbit-core{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.19);border:1px solid rgba(255,255,255,.4);font-size:2rem;backdrop-filter:blur(6px)}
+.cycle-phase-card.phase-menstrual{background:linear-gradient(135deg,#512f4b,#9b627e 60%,#d9a3b0)}
+.cycle-phase-card.phase-follicular{background:linear-gradient(135deg,#293d68,#7776b8 58%,#c5b8f1)}
+.cycle-phase-card.phase-ovulation{background:linear-gradient(135deg,#764d27,#c38a47 58%,#f0cb91)}
+.cycle-phase-card.phase-luteal{background:linear-gradient(135deg,#244c4a,#4d9185 58%,#a5d6c2)}
+.cycle-form-card,.cycle-note-card{padding:22px;border-radius:22px;border:1px solid var(--border,rgba(255,255,255,.13));background:rgba(255,255,255,.035)}
+.cycle-form-card h3,.cycle-note-card h3{margin:0 0 8px}
+.cycle-form-card .muted,.cycle-note-card p{line-height:1.6}
+.cycle-input-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cycle-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.cycle-secondary{border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:12px 17px;background:rgba(255,255,255,.06);color:inherit;font:inherit;cursor:pointer}
+.cycle-feedback{min-height:1.2em;font-size:.88rem}
+@media(max-width:560px){.cycle-phase-card{padding:22px;min-height:260px}.cycle-phase-title{max-width:72%;font-size:1.75rem}.cycle-phase-subtitle{max-width:68%;font-size:.9rem}.cycle-orbit{right:10px;width:90px;height:90px}.cycle-orbit-core{width:50px;height:50px}.cycle-input-grid{grid-template-columns:1fr}.cycle-actions>*{width:100%}}
+</style>
+<script>
+/* Cycle tracker v1: estimates only, locally stored, no health data transmitted. */
+(function(){
+ const $=id=>document.getElementById(id);
+ const storeKey="neurolab-cycle-v1";
+ const phases=[
+  {key:"menstrual",name:"Menstrual phase",kicker:"REST · RESET · BE GENTLE",subtitle:"A gentle invitation to slow down if that feels right. Your own energy and needs matter more than any phase description.",symbol:"☾"},
+  {key:"follicular",name:"Follicular phase",kicker:"BEGIN · EXPLORE · OPEN",subtitle:"A fresh chapter in the cycle estimate. If you feel curious or energised, make room for it. There is no required way to feel.",symbol:"✧"},
+  {key:"ovulation",name:"Around ovulation",kicker:"CONNECT · EXPRESS · NOTICE",subtitle:"This is an approximate calendar window, not confirmation of ovulation. Let your real experience lead.",symbol:"☼"},
+  {key:"luteal",name:"Luteal phase",kicker:"REFLECT · NURTURE · CHOOSE",subtitle:"A moment to check in with yourself and make adjustments that actually help. There is no single luteal-phase experience.",symbol:"❋"}
+ ];
+ function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+ function load(){try{return JSON.parse(localStorage.getItem(storeKey)||"null")}catch(e){return null}}
+ function save(data){localStorage.setItem(storeKey,JSON.stringify(data))}
+ function dayDifference(a,b){const aa=new Date(a+"T12:00:00"),bb=new Date(b+"T12:00:00");return Math.floor((bb-aa)/86400000)}
+ function showFeedback(msg){const el=$("cycleFeedback");if(el)el.textContent=msg}
+ function render(){
+  const data=load(),card=$("cyclePhaseCard");if(!card)return;
+  if(!data||!data.lastPeriod){card.className="cycle-phase-card phase-menstrual";$("cyclePhaseKicker").textContent="YOUR CURRENT CHAPTER";$("cyclePhaseTitle").textContent="Your rhythm begins here";$("cyclePhaseSubtitle").textContent="Add the first day of your last period to personalise this space.";$("cycleDayLabel").textContent="Cycle day not set";return}
+  const length=Math.min(60,Math.max(15,Number(data.cycleLength)||28)),period=Math.min(15,Math.max(1,Number(data.periodLength)||5));
+  const elapsed=dayDifference(data.lastPeriod,todayISO());
+  if(elapsed<0){showFeedback("That date is in the future. Please check your last period start date.");return}
+  const day=(elapsed%length)+1;
+  let idx;if(day<=period)idx=0;else if(day<Math.round(length*.45))idx=1;else if(day<=Math.round(length*.58))idx=2;else idx=3;
+  const phase=phases[idx];card.className="cycle-phase-card phase-"+phase.key;
+  $("cyclePhaseKicker").textContent=phase.kicker;$("cyclePhaseTitle").textContent=phase.name;$("cyclePhaseSubtitle").textContent=phase.subtitle;
+  $("cycleDayLabel").textContent="Estimated cycle day "+day+" of "+length+" · "+(day<=period?"Period window based on your settings":"Calendar estimate");
+  const orbit=card.querySelector(".cycle-orbit-core");if(orbit)orbit.textContent=phase.symbol;
+ }
+ function init(){
+  const data=load();if(data){$("cycleLastPeriod").value=data.lastPeriod||"";$("cycleLength").value=data.cycleLength||28;$("cyclePeriodLength").value=data.periodLength||5}
+  $("saveCycleSettings")?.addEventListener("click",function(){
+   const last=$("cycleLastPeriod").value,length=Number($("cycleLength").value),period=Number($("cyclePeriodLength").value);
+   if(!last){showFeedback("Choose the first day of your most recent period.");return}
+   if(last>todayISO()){showFeedback("That date is in the future. Please check it.");return}
+   if(!Number.isInteger(length)||length<15||length>60){showFeedback("Cycle length must be between 15 and 60 days.");return}
+   if(!Number.isInteger(period)||period<1||period>15||period>length){showFeedback("Period length must be between 1 and 15 days, and no longer than the cycle.");return}
+   try{save({lastPeriod:last,cycleLength:length,periodLength:period});showFeedback("Saved on this device. Your colours have been updated.");render()}catch(e){showFeedback("Could not save on this device. Check your browser storage settings.")}
+  });
+  $("logPeriodToday")?.addEventListener("click",function(){
+   const old=load()||{cycleLength:28,periodLength:5};old.lastPeriod=todayISO();$("cycleLastPeriod").value=old.lastPeriod;
+   try{save(old);showFeedback("Today is saved as a new period start. Your cycle estimate has reset.");render()}catch(e){showFeedback("Could not save on this device. Check your browser storage settings.")}
+  });
+  render();
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
 </script>
 </body></html>
