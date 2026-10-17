@@ -1,4 +1,4 @@
-const CACHE = "neurolab-shell-v2";
+const CACHE = "neurolab-shell-v3";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
