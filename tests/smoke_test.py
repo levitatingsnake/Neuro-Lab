@@ -153,6 +153,13 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("tarot-saved-v1|report-date", self.html)
         self.assertIn("saved.slice(0,10)", self.html)
 
+    def test_world_navigation_fallback_and_cache_refresh(self):
+        self.assertIn("Last-resort world navigation", self.html)
+        self.assertIn('target.closest(".world-choice[data-world]")', self.html)
+        self.assertIn('target.closest("#closeCosmos")', self.html)
+        worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
+        self.assertIn('const CACHE = "neurolab-shell-v44"', worker)
+
     def test_outer_cosmos_has_mission_control_navigation(self):
         self.assertIn('id="outerMissionControl"', self.html)
         self.assertIn('data-observatory-target="cosmosSun"', self.html)
