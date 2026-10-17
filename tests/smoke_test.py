@@ -72,7 +72,8 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('id="mindPracticeHistory"', self.html)
         self.assertIn("mindState.followUps.push(entry)", self.html)
         self.assertIn("entry.reflection=document.getElementById", self.html)
-        self.assertIn("saveMind();renderMindHistory(); replies.innerHTML=", self.html)
+        self.assertIn("mindState.followUps=mindState.followUps.slice(-100)", self.html)
+        self.assertIn('replies.innerHTML=\'<div class="field"><label for="mindFollowUpNote">', self.html)
 
     def test_mind_progress_insights_use_saved_checkin_counts(self):
         self.assertIn('id="mindProgressInsights"', self.html)
