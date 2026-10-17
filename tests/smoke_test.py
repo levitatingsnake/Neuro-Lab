@@ -66,6 +66,16 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('"Adjustments"', self.html)
         self.assertIn("Your first check-in will create a baseline.", self.html)
 
+    def test_mind_skills_map_and_missions_are_persistent(self):
+        self.assertIn('id="mindSkillsPanel"', self.html)
+        self.assertIn('id="mindSkillGrid"', self.html)
+        self.assertIn('id="mindMissionList"', self.html)
+        self.assertIn("const mindSkillCatalog=[", self.html)
+        self.assertIn("const mindMissionCatalog=[", self.html)
+        self.assertIn("mindState.completedMissions=current.filter", self.html)
+        self.assertIn("saveMind();renderMindSkills()", self.html)
+        self.assertIn("renderMindHistory();renderMindSkills();", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
