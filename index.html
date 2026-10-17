@@ -169,6 +169,10 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 @media(max-width:480px){.launch-portal{width:min(70vw,240px)}.launch-caption{font-size:.6rem;letter-spacing:.16em}}
 
 
+/* Boot safety: after the launch animation, show the world selector only until a world is chosen. */
+body:not(.cosmos-mode):not(.mind-first):not(.outer-cosmos-mode) .shell>:not(#worldLanding):not(.top){display:none!important}
+#worldLanding{position:relative;z-index:2;min-height:55vh}
+#worldLanding.hidden{display:none!important}
 /* Hard world boundaries: only the active world is visible inside the app shell. */
 body.cosmos-mode .shell>:not(#innerCosmos),
 body.outer-cosmos-mode .shell>:not(#outerCosmos),
