@@ -52,6 +52,12 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertLess(backup_pos, mind_end)
         self.assertIn("cycle-v1", self.html)
 
+    def test_mind_training_saves_practice_followups_and_reflections(self):
+        self.assertIn('id="mindPracticeHistory"', self.html)
+        self.assertIn("mindState.followUps.push(entry)", self.html)
+        self.assertIn("entry.reflection=document.getElementById", self.html)
+        self.assertIn("renderMindHistory();if(mindState.step", self.html)
+
     def test_inline_javascript_parses(self):
         scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", self.html, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found")
