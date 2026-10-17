@@ -13,6 +13,17 @@ class NeuroLabSmokeTests(unittest.TestCase):
     def setUpClass(cls):
         cls.html = HTML_PATH.read_text(encoding="utf-8")
 
+    def test_world_picker_shows_only_world_choices_and_keeps_intro_copy(self):
+        self.assertIn("body.world-picker-mode #innerCosmos,body.world-picker-mode #outerCosmos,body.world-picker-mode #mindHome{display:none!important}", self.html)
+        landing_start = self.html.index('id="worldLanding"')
+        landing_end = self.html.index("</section>", landing_start)
+        landing = self.html[landing_start:landing_end]
+        self.assertIn("NEURO//LAB · TWO WORLDS, ONE UNIVERSE", landing)
+        self.assertIn("Turn inward to explore the mind, meaning and human wisdom.", landing)
+        self.assertIn("Turn outward to explore our star, the space around Earth, and the science of a changing universe.", landing)
+        self.assertEqual(len(re.findall(r'class="world-choice"', landing)), 2)
+        self.assertIn('</section>\n\n<section id="outerCosmos"', self.html)
+
     def test_inner_cosmos_has_four_distinct_hub_options(self):
         tabs = re.findall(r'<button[^>]*class="cosmos-tab[^"]*"[^>]*data-cosmos="([^"]+)"[^>]*>(.*?)</button>', self.html)
         labels = {key: re.sub(r"<[^>]+>", "", label).replace("&amp;", "&").strip() for key, label in tabs}
