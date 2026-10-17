@@ -114,7 +114,7 @@ body.mind-first .status{font-size:.67rem;letter-spacing:.08em}
 body.cosmos-mode .hero,body.cosmos-mode .stats,body.cosmos-mode .app-nav,body.cosmos-mode #viewHeading,body.cosmos-mode #viewCheckin,body.cosmos-mode #viewSkills,body.cosmos-mode #viewPathways,body.cosmos-mode #viewMissionHeading,body.cosmos-mode #missions,body.cosmos-mode #missionPanel,body.cosmos-mode #viewGoals,body.cosmos-mode #viewNotes,body.cosmos-mode .notice,body.cosmos-mode footer,body.cosmos-mode #mindHome{display:none!important}
 body.cosmos-mode .shell{max-width:940px}
 
-.cosmos-launch{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;width:100%;max-width:420px;min-height:54px;font-size:1rem;box-shadow:0 0 28px rgba(158,127,255,.18)}.coordinate-details{margin:12px 0 18px;padding:12px;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:12px}.coordinate-details summary{cursor:pointer;color:#c5b7ff}.planet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:16px 0}.planet-row{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid rgba(180,160,255,.18);border-radius:10px;background:rgba(150,120,255,.06)}.planet-row span{color:var(--muted,#aaa)}.planet-row strong{font-size:.9rem;text-align:right}</style></head>
+.cosmos-launch{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;width:100%;max-width:420px;min-height:54px;font-size:1rem;box-shadow:0 0 28px rgba(158,127,255,.18)}.coordinate-details{margin:12px 0 18px;padding:12px;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:12px}.coordinate-details summary{cursor:pointer;color:#c5b7ff}.planet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:16px 0}.planet-row{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid rgba(180,160,255,.18);border-radius:10px;background:rgba(150,120,255,.06)}.planet-row span{color:var(--muted,#aaa)}.planet-row strong{font-size:.9rem;text-align:right}.planet-meaning{font-size:.85rem;line-height:1.45;color:var(--muted,#aaa);margin:5px 0 0}.planet-position{font-weight:700;white-space:nowrap;text-align:right;align-self:center}.planet-row>div:first-child{min-width:0}.cosmos-result h2{margin:.35rem 0}.cosmos-result h3{margin-top:1.1rem}</style></head>
 <body><main class="shell">
 <header class="top"><div class="brand">NEURO<span>//</span>LAB</div><div class="status">PERSONAL MIND ENGINE</div></header>
 
@@ -352,15 +352,31 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
  }
  const baseReport=makeDailyReport;
  window.neuroLabRenderChart=function(b){
+  const result=document.getElementById("birthResult");
   try{
-   const pos=chart(b),sun=pos.Sun,moon=pos.Moon,sign=signAt(sun),now=new Date(),dayKey=now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate(),n=(now.getDate()+now.getMonth()*3+sign.length)%dailyPrompts.length,prompt=dailyPrompts[n],saved=localStorage.getItem("neurolab-report-date");
-   const planets=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn"];
-   const rows=planets.map(k=>'<div class="planet-row"><span>'+k+'</span><strong>'+fmt(pos[k])+'</strong></div>').join("");
-   const asc=pos.Ascendant!=null?'<div class="planet-row"><span>Ascendant (approx.)</span><strong>'+fmt(pos.Ascendant)+'</strong></div>':'<p class="muted">Add latitude, longitude, birth time and the correct historical UTC offset in Advanced chart settings to estimate your Ascendant.</p>';
-   document.getElementById("birthResult").innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR OFFLINE NATAL SKY</div><h3>'+escapeHtml(sign)+' Sun</h3><p class="muted">Birthplace: '+escapeHtml(b.place||"Not provided")+' · '+escapeHtml(b.date)+(b.time?' at '+escapeHtml(b.time):' · time unknown')+'</p><div class="planet-grid">'+rows+asc+'</div><div class="eyebrow" style="margin-top:16px">DAILY REFLECTION · '+escapeHtml(dayKey)+'</div><h3 style="font-size:1.12rem">'+escapeHtml(prompt)+'</h3><p>'+escapeHtml(signNotes[sign]||"Use today's theme as a prompt for reflection, not a prediction.")+'</p><p><strong>Try this:</strong> Write one sentence about how this theme shows up in your actual day. Keep what resonates and leave the rest.</p><button class="primary" id="refreshReport">Update today\'s report</button><p class="muted" style="font-size:.8rem;margin-top:10px">'+(saved===dayKey?"Today's report is up to date.":"This reflection is generated for today's date.")+' Approximate geocentric positions are calculated on this device; no data is sent to a server.</p></div>';
-   document.getElementById("refreshReport").onclick=()=>{localStorage.setItem("neurolab-report-date",dayKey);makeDailyReport(b)};
-  }catch(err){console.error("Astrology calculation failed",err);baseReport(b)}
- };
+   const pos=chart(b),sign=signAt(pos.Sun),now=new Date(),dayKey=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+   const descriptions={
+    Sun:"Core identity, vitality and the qualities you are learning to express.",
+    Moon:"Emotional needs, instinctive reactions and what helps you feel safe.",
+    Mercury:"Thinking, learning, communication and the way you make meaning.",
+    Venus:"Affection, values, pleasure and how you build connection.",
+    Mars:"Drive, courage, boundaries and how you pursue what matters.",
+    Jupiter:"Growth, opportunity, belief and the areas where you seek a wider horizon.",
+    Saturn:"Responsibility, patience, limits and the skills built through sustained effort.",
+    Ascendant:"The zodiac sign rising on the eastern horizon at birth. This depends strongly on accurate birth time, coordinates and historical time zone."
+   };
+   const keys=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn"];
+   const rows=keys.map(k=>'<article class="planet-row"><div><strong>'+k+'</strong><p class="planet-meaning">'+descriptions[k]+'</p></div><div class="planet-position">'+fmt(pos[k])+'</div></article>').join("");
+   const asc=pos.Ascendant!=null?'<article class="planet-row"><div><strong>Ascendant</strong><p class="planet-meaning">'+descriptions.Ascendant+'</p></div><div class="planet-position">'+fmt(pos.Ascendant)+'</div></article>':'<p class="muted">Ascendant not calculated yet. Open Advanced chart settings and enter birth latitude, longitude, birth time and the UTC offset that applied at your birth.</p>';
+   const sunNote=signNotes[sign]||"Treat this as a reflection prompt rather than a prediction.";
+   const moonSign=signAt(pos.Moon);
+   result.innerHTML='<div class="cosmos-result"><div class="eyebrow">YOUR NATAL SKY · APPROXIMATE POSITIONS</div><h2>'+escapeHtml(sign)+' Sun</h2><p class="muted">'+escapeHtml(b.place||"Birthplace not entered")+' · '+escapeHtml(b.date)+(b.time?" · "+escapeHtml(b.time):" · birth time unknown")+'</p><p><strong>Sun in '+escapeHtml(sign)+':</strong> '+escapeHtml(sunNote)+'</p><p><strong>Moon in '+escapeHtml(moonSign)+':</strong> This sign is traditionally used as a lens for emotional habits and needs. Notice which parts fit your lived experience rather than treating them as fixed facts.</p><h3>Planetary placements</h3><div class="planet-grid">'+rows+asc+'</div><h3>How to read this chart</h3><p>The Sun is one part of an astrology chart, not the whole personality. The Moon is commonly read for emotional patterns; Mercury for thought and communication; Venus for values and relationships; Mars for action; Jupiter for growth; and Saturn for responsibility and boundaries.</p><p>These are symbolic interpretations from an astrological tradition, not scientifically established personality measurements or predictions. Planet positions here use an offline, low-precision calculation and can differ from professional ephemeris software.</p><div class="eyebrow" style="margin-top:18px">TODAY'S REFLECTION · '+escapeHtml(dayKey)+'</div><h3>'+escapeHtml(dailyPrompts[(now.getDate()+now.getMonth()*3+sign.length)%dailyPrompts.length])+'</h3><p>'+escapeHtml(sunNote)+'</p><p><strong>Reflection:</strong> What part of this theme is genuinely useful to you today, and what does not fit?</p><button class="primary" id="refreshReport" type="button">Refresh today's reflection</button></div>';
+   const refresh=document.getElementById("refreshReport");if(refresh)refresh.onclick=()=>window.neuroLabRenderChart(b);
+  }catch(err){
+   console.error("Astrology chart generation failed:",err);
+   if(result)result.innerHTML='<div class="cosmos-result"><h3>Your birth profile is saved, but the chart engine hit an error.</h3><p>Please check that the birth date is valid, then tap Create my astrology profile again. The technical error is recorded in the browser console.</p><p>Saved date: '+escapeHtml(b.date||"not entered")+'</p></div>';
+  }
+ }
  makeDailyReport=window.neuroLabRenderChart;
 })();
 
