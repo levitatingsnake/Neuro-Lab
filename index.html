@@ -369,7 +369,7 @@ if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventL
   const utc=new Date(local.getTime()-off*3600000),out={};
   const astro=window.Astronomy;
   out.Sun=norm(astro.SunPosition(utc).elon);
-  out.Moon=norm(astro.EclipticGeoMoon(utc).lon);
+  out.Moon=norm(astro.EclipticGeoMoon(utc).elon);
   for(const name of ["Mercury","Venus","Mars","Jupiter","Saturn"]){
    const body=astro.Body[name];
    if(body===undefined) throw new Error("Planetary calculation unavailable for "+name+".");
