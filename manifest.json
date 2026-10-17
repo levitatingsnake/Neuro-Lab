@@ -1,12 +1,12 @@
 {
-  "name": "NEURO//LAB Mind Training",
+  "name": "NEURO//LAB | Inner Cosmos & Mind Training",
   "short_name": "NEURO//LAB",
-  "description": "Practical psychology missions, goals and field notes.",
+  "description": "Explore your potential, train your mind, and build a more hopeful future.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0a0e17",
-  "theme_color": "#0a0e17",
+  "background_color": "#080b18",
+  "theme_color": "#080b18",
   "icons": [
     {
       "src": "./icon.svg",
