@@ -552,18 +552,22 @@ if(!panel||!root||!insights)return;
 const entries=Array.isArray(mindState.followUps)?mindState.followUps:[];
 panel.classList.toggle("hidden",entries.length===0);root.innerHTML="";insights.innerHTML="";
 const counts=entries.reduce((outcomeCounts,entry)=>{outcomeCounts[entry.outcome]=(outcomeCounts[entry.outcome]||0)+1;return outcomeCounts;},{});
+const recent=entries.slice(-3),recentCounts=recent.reduce((outcomeCounts,entry)=>{outcomeCounts[entry.outcome]=(outcomeCounts[entry.outcome]||0)+1;return outcomeCounts;},{}),reflectionCount=entries.filter(entry=>typeof entry.reflection==="string"&&entry.reflection.trim()).length;
 const cards=[
 {label:"Check-ins",value:String(entries.length),detail:"Saved practice reviews"},
 {label:"Helpful moments",value:String(counts.helped||0),detail:"Times a step helped"},
-{label:"Adjustments",value:String((counts.hard||0)+(counts.missed||0)+(counts.changed||0)),detail:"Times the plan needed to adapt"}
+{label:"Adjustments",value:String((counts.hard||0)+(counts.missed||0)+(counts.changed||0)),detail:"Times the plan needed to adapt"},
+{label:"Reflections",value:String(reflectionCount),detail:"Check-ins with your own notes"}
 ];
 cards.forEach(item=>{const card=document.createElement("article");card.className="dash-card";const label=document.createElement("p");label.className="muted";label.textContent=item.label;const value=document.createElement("strong");value.className="mind-insight-value";value.textContent=item.value;const detail=document.createElement("p");detail.textContent=item.detail;card.append(label,value,detail);insights.appendChild(card)});
 const note=document.createElement("p");note.className="mind-insight-note";
-const total=entries.length,helped=counts.helped||0,hard=counts.hard||0,missed=counts.missed||0,changed=counts.changed||0;
+const total=entries.length,helped=counts.helped||0,hard=counts.hard||0,missed=counts.missed||0,changed=counts.changed||0,recentTotal=recent.length,recentHelped=recentCounts.helped||0,recentFriction=(recentCounts.hard||0)+(recentCounts.missed||0);
 if(!total)note.textContent="Your first check-in will create a baseline. There is no score to chase.";
-else if(helped>0&&helped>=hard+missed+changed)note.textContent="Your check-ins most often report that a step helped. Repeat the useful part before making the plan bigger.";
-else if(hard+missed>helped)note.textContent="Several check-ins show friction or difficulty. That is a cue to shrink the next step or change its timing, not to blame yourself.";
-else if(changed>0)note.textContent="Your circumstances have changed at least once. Review whether the current plan still fits the life you have now.";
+else if(recentTotal>=2&&recentHelped>recentFriction)note.textContent="Your recent check-ins more often say the step helped. Repeat the useful part before making the plan bigger. This is an early signal, not proof that one approach always works.";
+else if(recentTotal>=2&&recentFriction>recentHelped)note.textContent="Your recent check-ins show friction or difficulty. Shrink the next step or change its timing, rather than blaming yourself. A few check-ins are clues, not a verdict.";
+else if(recentCounts.changed>0)note.textContent="Your circumstances changed in a recent check-in. Review whether the current plan still fits your life now.";
+else if(total<3)note.textContent="You are building your baseline. Keep logging what happened, including what helped or got in the way, before drawing conclusions.";
+else if(helped>0&&helped>=hard+missed+changed)note.textContent="Across your saved check-ins, steps have most often helped. Repeat the useful part before making the plan bigger.";
 else note.textContent="You are collecting real-world information. Look for one thing to keep, one thing to change, and one small next experiment.";
 insights.appendChild(note);
 entries.slice().reverse().forEach(entry=>{
