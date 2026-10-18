@@ -1,25 +1,50 @@
 # NEURO//LAB
 
-A mobile-first personal development prototype, designed to deploy as a Progressive Web App (PWA).
+A mobile-first personal development and curiosity lab, built as a Progressive Web App (PWA). The experience is organised around two connected spaces: **Inner Cosmos** for reflection and human meaning, and **Outer Cosmos** for astronomy and live space-weather observations.
 
-## Features
-- Three interactive starter missions: self-awareness, emotional regulation, and habit design.
-- Personal objectives with completion tracking.
-- Field notes.
-- Browser-local persistence.
-- PWA manifest, app icon, service worker and GitHub Pages deployment workflow.
+## Current experiences
 
-## Deploy
-1. In GitHub, open **Settings → Pages**.
-2. Set the source to **GitHub Actions**.
-3. The workflow in `.github/workflows/pages.yml` deploys the site when changes are pushed to `main`.
-4. Once the workflow completes, open the Pages URL on your iPhone in Safari, tap Share, then **Add to Home Screen**.
+- **Inner Cosmos**
+  - Birth chart reflection, with birth details entered by the user.
+  - Cycle & Wellbeing tracking, with clear caveats about estimates and non-medical use.
+  - Wisdom Library for exploring philosophical and spiritual traditions.
+  - Mind Training with guided reflection, skill development, practice missions, saved reflections and progress insights.
+  - Tarot readings with randomised card draws, multiple spreads, interpretations and a locally saved reading archive.
+- **Outer Cosmos**
+  - NASA Solar Dynamics Observatory imagery across several solar observation channels.
+  - Space-weather observations and aurora-related information from public scientific data sources when available.
+  - Clear unavailable-data messaging rather than invented live readings.
+- **Personal data**
+  - Browser-local progress and settings.
+  - JSON backup and restore controls.
+  - Installable PWA shell with a service worker and mobile-friendly interface.
 
-## Important
-This is an early prototype, not a medical or diagnostic tool. Data is stored in the browser on the device and is not synced between devices. Clearing browser/site data may erase it. The service worker provides basic app-shell caching after the first successful load; test offline behaviour on the deployed site.
+## Try it on an iPhone
 
-## Planned next
-1. Expand the learning path into structured skill trees and scenario simulations.
-2. Add weekly reviews and more meaningful progress insights.
-3. Improve accessibility and testing.
-4. Consider export/backup before any cloud account system.
+1. Open the deployed GitHub Pages site (the URL is shown under **Settings → Pages** in this repository).
+2. Open it in Safari.
+3. Tap **Share → Add to Home Screen** to install the app-like shortcut.
+4. Explore both worlds and test the back navigation, Mind Training, Tarot draw/save, and backup/restore.
+
+## Development and deployment
+
+- The app is currently a lightweight, mostly single-page web app. The main interface is in `index.html`.
+- `service-worker.js` manages the cached app shell.
+- `.github/workflows/pages.yml` deploys `main` to GitHub Pages.
+- `.github/workflows/neurolab-smoke-test.yml` runs regression checks for key interface elements, navigation, backup controls, Tarot structure, PWA assets and inline JavaScript syntax.
+- Run the smoke tests locally with Python and Node.js installed:
+
+  ```bash
+  python -m unittest discover -s tests -v
+  ```
+
+## Privacy and limitations
+
+- Personal data is stored in the browser on the current device. It is **not** synchronised to an account or between devices.
+- Clearing browser/site data can erase saved progress. Export a backup before clearing data or changing devices.
+- Live NASA/space-weather feeds require an internet connection and may be temporarily unavailable.
+- Astrology, tarot, wellbeing and reflection content is for exploration and self-reflection. It is not medical, mental-health, diagnostic or guaranteed predictive advice.
+
+## Product direction
+
+The next priority is to make the experience feel coherent and genuinely useful on a phone: verify real-device navigation, strengthen functional tests, improve onboarding and accessibility, and sharpen the core reason to return. New features should build on a stable baseline rather than risk another broad redesign.
