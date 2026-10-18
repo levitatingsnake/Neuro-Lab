@@ -99,6 +99,16 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("saveMind();renderMindSkills()", self.html)
         self.assertIn("renderMindHistory();renderMindSkills();", self.html)
 
+    def test_saving_a_mission_reflection_does_not_uncomplete_mission(self):
+        start = self.html.indexOf('button.textContent=done?"Save reflection":"Save reflection & complete mission"')
+        self.assertGreaterEqual(start, 0)
+        end = self.html.indexOf('card.append(meta,title,desc,prompt,reflection,saved,button)', start)
+        handler = self.html[start:end]
+        self.assertIn('mindState.missionReflections[mission.id]=reflection.value.trim()', handler)
+        self.assertIn('if(!done){if(!current.includes(mission.id))current.push(mission.id)', handler)
+        self.assertNotIn('else{mindState.completedMissions=current.filter', handler)
+        self.assertNotIn('delete mindState.missionCompletedAt[mission.id]', handler)
+
     def test_mind_plan_adapts_to_latest_checkin(self):
         self.assertIn('const latest=Array.isArray(mindState.followUps)?mindState.followUps[mindState.followUps.length-1]:null;', self.html)
         self.assertIn('latest.outcome==="hard"', self.html)
