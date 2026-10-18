@@ -99,6 +99,15 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("saveMind();renderMindSkills()", self.html)
         self.assertIn("renderMindHistory();renderMindSkills();", self.html)
 
+    def test_mind_plan_adapts_to_latest_checkin(self):
+        self.assertIn('const latest=Array.isArray(mindState.followUps)?mindState.followUps[mindState.followUps.length-1]:null;', self.html)
+        self.assertIn('latest.outcome==="hard"', self.html)
+        self.assertIn('latest.outcome==="missed"', self.html)
+        self.assertIn('latest.outcome==="helped"', self.html)
+        self.assertIn('latest.outcome==="changed"', self.html)
+        self.assertIn('Link the smallest possible version to something you already do.', self.html)
+        self.assertIn('Make the experiment smaller: spend just 30 seconds', self.html)
+
     def test_mind_missions_save_reflections_and_recommend_next_step(self):
         self.assertIn('id="mindNextRecommendation"', self.html)
         self.assertIn("Your reflection (optional)", self.html)
