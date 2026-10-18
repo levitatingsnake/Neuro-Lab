@@ -75,6 +75,12 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("mindState.followUps=mindState.followUps.slice(-100)", self.html)
         self.assertIn('replies.innerHTML=\'<div class="field"><label for="mindFollowUpNote">', self.html)
 
+    def test_saved_mind_conversation_is_restored_on_reload(self):
+        self.assertIn("function restoreMindConversation()", self.html)
+        self.assertIn("mindState.messages.slice(-30).forEach(message=>", self.html)
+        self.assertIn("mindBubble(\"user\",String(message.label||mindQuestions[message.step].choices.find", self.html)
+        self.assertIn("function initMind(){restoreMindConversation();renderMindHistory();renderMindSkills();", self.html)
+
     def test_mind_progress_insights_use_saved_checkin_counts(self):
         self.assertIn('id="mindProgressInsights"', self.html)
         self.assertIn('const counts=entries.reduce', self.html)
