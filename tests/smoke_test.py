@@ -15,6 +15,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
 
     def test_world_picker_shows_only_world_choices_and_keeps_intro_copy(self):
         self.assertIn("body.world-picker-mode #innerCosmos,body.world-picker-mode #outerCosmos,body.world-picker-mode #mindHome{display:none!important}", self.html)
+        self.assertIn("body.world-picker-mode .shell>:not(.top):not(#worldLanding){display:none!important}", self.html)
         landing_start = self.html.index('id="worldLanding"')
         landing_end = self.html.index("</section>", landing_start)
         landing = self.html[landing_start:landing_end]
