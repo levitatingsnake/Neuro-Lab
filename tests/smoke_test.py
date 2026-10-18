@@ -95,7 +95,8 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('id="mindMissionList"', self.html)
         self.assertIn("const mindSkillCatalog=[", self.html)
         self.assertIn("const mindMissionCatalog=[", self.html)
-        self.assertIn("mindState.completedMissions=current.filter", self.html)
+        self.assertIn('if(!done){if(!current.includes(mission.id))current.push(mission.id)', self.html)
+        self.assertNotIn('else{mindState.completedMissions=current.filter', self.html)
         self.assertIn("saveMind();renderMindSkills()", self.html)
         self.assertIn("renderMindHistory();renderMindSkills();", self.html)
 
