@@ -100,9 +100,9 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("renderMindHistory();renderMindSkills();", self.html)
 
     def test_saving_a_mission_reflection_does_not_uncomplete_mission(self):
-        start = self.html.indexOf('button.textContent=done?"Save reflection":"Save reflection & complete mission"')
+        start = self.html.find('button.textContent=done?"Save reflection":"Save reflection & complete mission"')
         self.assertGreaterEqual(start, 0)
-        end = self.html.indexOf('card.append(meta,title,desc,prompt,reflection,saved,button)', start)
+        end = self.html.find('card.append(meta,title,desc,prompt,reflection,saved,button)', start)
         handler = self.html[start:end]
         self.assertIn('mindState.missionReflections[mission.id]=reflection.value.trim()', handler)
         self.assertIn('if(!done){if(!current.includes(mission.id))current.push(mission.id)', handler)
