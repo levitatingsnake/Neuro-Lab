@@ -646,12 +646,11 @@ const desc=document.createElement("p");desc.textContent=mission.description;
 const prompt=document.createElement("label");prompt.className="mind-reflection-label";prompt.textContent="Your reflection (optional)";
 const reflection=document.createElement("textarea");reflection.className="mind-mission-reflection";reflection.maxLength=500;reflection.setAttribute("aria-label","Reflection for "+mission.title);reflection.placeholder=mission.reflection;reflection.value=(mindState.missionReflections&&mindState.missionReflections[mission.id])||"";
 const saved=document.createElement("p");saved.className="muted";saved.textContent=done?"Completed"+(mindState.missionCompletedAt&&mindState.missionCompletedAt[mission.id]?" · "+new Date(mindState.missionCompletedAt[mission.id]).toLocaleDateString():""):"Afterwards: "+mission.reflection;
-const button=document.createElement("button");button.type="button";button.className=done?"cycle-secondary":"primary";button.textContent=done?"Save reflection / practise again":"Save reflection & complete mission";button.setAttribute("aria-pressed",done?"true":"false");
+const button=document.createElement("button");button.type="button";button.className=done?"cycle-secondary":"primary";button.textContent=done?"Save reflection":"Save reflection & complete mission";
 button.addEventListener("click",()=>{
 if(!mindState.missionReflections)mindState.missionReflections={};mindState.missionReflections[mission.id]=reflection.value.trim();
 const current=mindCompletedMissions();
 if(!done){if(!current.includes(mission.id))current.push(mission.id);if(!mindState.missionCompletedAt)mindState.missionCompletedAt={};mindState.missionCompletedAt[mission.id]=new Date().toISOString();if(!mindState.missionNotes)mindState.missionNotes={};mindState.missionNotes[mission.id]="Reflection saved"}
-else{mindState.completedMissions=current.filter(id=>id!==mission.id);if(mindState.missionCompletedAt)delete mindState.missionCompletedAt[mission.id]}
 saveMind();renderMindSkills()
 });
 card.append(meta,title,desc,prompt,reflection,saved,button);list.appendChild(card)
