@@ -82,6 +82,14 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("mindBubble(\"user\",String(message.label||mindQuestions[message.step].choices.find", self.html)
         self.assertIn("function initMind(){restoreMindConversation();renderMindHistory();renderMindSkills();", self.html)
 
+    def test_mind_progress_insights_use_recent_checkins_and_reflection_count(self):
+        self.assertIn('const recent=entries.slice(-3)', self.html)
+        self.assertIn('const recentTotal=recent.length', self.html)
+        self.assertIn('label:"Reflections",value:String(reflectionCount)', self.html)
+        self.assertIn('Your recent check-ins more often say the step helped.', self.html)
+        self.assertIn('Your recent check-ins show friction or difficulty.', self.html)
+        self.assertIn('A few check-ins are clues, not a verdict.', self.html)
+
     def test_mind_progress_insights_use_saved_checkin_counts(self):
         self.assertIn('id="mindProgressInsights"', self.html)
         self.assertIn('const counts=entries.reduce', self.html)
