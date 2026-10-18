@@ -178,7 +178,10 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('target.closest(".world-choice[data-world]")', self.html)
         self.assertIn('target.closest("#closeCosmos")', self.html)
         worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
-        self.assertIn('const CACHE = "neurolab-shell-v45"', worker)
+        self.assertIn('const CACHE = "neurolab-shell-v46"', worker)
+        self.assertIn('if (url.origin !== self.location.origin) return;', worker)
+        self.assertIn('event.request.mode === "navigate"', worker)
+        self.assertIn('let the request fail normally instead of substituting HTML for that asset', worker)
 
     def test_outer_cosmos_has_mission_control_navigation(self):
         self.assertIn('id="outerMissionControl"', self.html)
