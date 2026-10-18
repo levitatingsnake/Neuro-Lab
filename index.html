@@ -670,7 +670,19 @@ recommendation.append(label,heading,body);
 if(next){const jump=document.createElement("button");jump.type="button";jump.className="cycle-secondary";jump.textContent="Find this mission";jump.addEventListener("click",()=>{const target=Array.from(list.children).find(item=>item.querySelector("h4")?.textContent===next.title);if(target){target.scrollIntoView({behavior:"smooth",block:"center"});target.querySelector("textarea")?.focus({preventScroll:true})}});recommendation.appendChild(jump)}
 }
 }
-function initMind(){renderMindHistory();renderMindSkills();if(mindState.step==="plan"&&mindState.plan){renderMindPlan();return}if(mindState.planAccepted&&mindState.plan){renderMindPlan();return}renderMindQuestion()}
+function restoreMindConversation(){
+const root=document.getElementById("mindConversation");
+if(!root||root.children.length||!Array.isArray(mindState.messages)||!mindState.messages.length)return;
+mindBubble("agent","Hi. I'm here to help you make sense of what's going on and work out what might help. You don't need to have the perfect words. Let's start wherever you are.");
+mindState.messages.slice(-30).forEach(message=>{
+if(!message||!mindQuestions[message.step])return;
+const question=mindQuestions[message.step];
+mindBubble("agent",question.text);
+mindBubble("user",String(message.label||mindQuestions[message.step].choices.find(choice=>choice.value===message.value)?.label||"Your answer"));
+mindBubble("agent",mindReflect(message.step,message.value,false));
+});
+}
+function initMind(){restoreMindConversation();renderMindHistory();renderMindSkills();if(mindState.step==="plan"&&mindState.plan){renderMindPlan();return}if(mindState.planAccepted&&mindState.plan){renderMindPlan();return}renderMindQuestion()}
 initMind();
 
 if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(err=>console.log("Offline setup unavailable",err)))}
