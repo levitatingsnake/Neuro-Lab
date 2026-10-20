@@ -313,7 +313,9 @@ function transmute(){
   operationHistory.push({step:operationHistory.length+1,rite,intensity,intention,before:result.before.slice(),after:result.after.slice(),trace:result.trace.map(x=>({name:x.name,detail:x.detail}))});
   last={engine:{type:"local symbolic transformation engine"},inputFingerprint:hash(raw),settings:{rite,intensity},operations:result.trace,transformation:{dimensions:result.after.map((v,i)=>({label:"dimension "+i,before:result.before[i],after:v}))}};
 }
-""" + engine_functions + summary_function + """
+""" + engine_functions + """
+function render(){}
+""" + summary_function + """
 runFormula();
 if (!last || !last.formula) throw Error("Formula result was not recorded");
 if (last.formula.steps.length !== last.formula.sequence.length) throw Error("Step trace length differs from executed formula");
