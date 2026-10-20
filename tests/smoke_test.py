@@ -250,7 +250,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("function exportRecord()", alchemy)
         self.assertIn("localStorage.getItem(STORE)", alchemy)
         self.assertIn("does not contact external systems", alchemy)
-        scripts = re.findall(r"<script\\b[^>]*>(.*?)</script\\s*>", alchemy, flags=re.I | re.S)
+        scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", alchemy, flags=re.I | re.S)
         self.assertTrue(scripts, "No inline scripts found in alchemy.html")
         for index, script in enumerate(scripts, start=1):
             if not script.strip():
@@ -259,7 +259,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
                 temp.write(script)
                 temp.flush()
                 result = subprocess.run(["node", "--check", temp.name], capture_output=True, text=True)
-            self.assertEqual(result.returncode, 0, f"Alchemy inline script {index} has a syntax error:\\n{result.stderr}")
+            self.assertEqual(result.returncode, 0, f"Alchemy inline script {index} has a syntax error:\n{result.stderr}")
 
 
 if __name__ == "__main__":
