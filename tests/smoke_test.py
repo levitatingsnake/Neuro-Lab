@@ -259,7 +259,7 @@ const outcomes = ["clarity","release","integrate","possibilities","embody","full
 for (const outcome of outcomes) {
   const plan = planFormula(raw, outcome, "balanced", "make the pattern clearer");
   if (!plan.sequence.length || !plan.alternatives.length) throw Error("Missing plan for " + outcome);
-  if (plan.alternatives.length !== (outcome === "full" ? 1 : 3)) throw Error("Unexpected candidate count for " + outcome);
+  if (plan.alternatives.length !== Math.min(5, plan.candidateCount)) throw Error("Unexpected shortlist size for " + outcome);\n  if (plan.candidateCount < (outcome === "full" ? 1 : 6)) throw Error("Planner did not expand operation orderings for " + outcome);
   const best = Math.min(...plan.alternatives.map(x => {
     let state = materialProfile(raw).state.slice();
     for (const rite of x.sequence) state = transformAlchemy(raw, rite, "balanced", "make the pattern clearer", state).after;
