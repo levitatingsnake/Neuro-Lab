@@ -335,6 +335,78 @@ console.log("PASS: executed formula steps, per-step metrics and copied summary a
         self.assertEqual(result.returncode, 0, f"Formula-run integration test failed:\n{result.stdout}\n{result.stderr}")
         self.assertIn("PASS: executed formula steps", result.stdout)
 
+    def test_alchemy_reset_restores_seed_and_clears_run_state(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        handler_start = alchemy.index('$("resetState").onclick=()=>{')
+        handler_end = alchemy.index('$("example").onclick=', handler_start)
+        reset_handler = alchemy[handler_start:handler_end]
+        profile_start = alchemy.index("function materialProfile")
+        profile_end = alchemy.index("function transformAlchemy", profile_start)
+        profile_function = alchemy[profile_start:profile_end]
+        harness = """
+const elements = {
+  material:{value:"Fire and water. A signal emerges from the dark."},
+  output:{classList:{add(name){this.hidden=true},remove(){this.hidden=false}}},
+  console:{textContent:"old result"}, resetState:{}, rite:{value:"rubedo"}
+};
+const $ = id => elements[id] || (elements[id]={value:"",textContent:"",classList:{add(){},remove(){}}});
+const document = {querySelectorAll(){return [{classList:{remove(){}}},{classList:{remove(){}}}]}};
+let last={old:true}, workingState=[0.1,0.2], workingFingerprint="old", operationHistory=[{rite:"rubedo"}];
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
+""" + profile_function + """
+""" + reset_handler + """
+elements.resetState.onclick();
+if(last!==null) throw Error("Reset did not clear the previous result");
+if(operationHistory.length!==0) throw Error("Reset did not clear operation history");
+if(workingFingerprint!==hash(elements.material.value.trim())) throw Error("Reset fingerprint does not match current material");
+if(JSON.stringify(workingState)!==JSON.stringify(materialProfile(elements.material.value.trim()).state)) throw Error("Reset did not restore the material seed profile");
+if(!elements.output.classList.hidden) throw Error("Reset did not hide the old output");
+if(!elements.console.textContent.includes("BENCH RESET")) throw Error("Reset status message missing");
+elements.material.value="x";
+elements.resetState.onclick();
+if(!elements.console.textContent.includes("Enter material before resetting")) throw Error("Short-material guard missing");
+console.log("PASS: reset restores seed, clears history/result and guards empty material");
+"""
+        with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as temp:
+            temp.write(harness)
+            temp.flush()
+            result = subprocess.run(["node", temp.name], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"Bench reset integration test failed:\\n{result.stdout}\\n{result.stderr}")
+        self.assertIn("PASS: reset restores seed", result.stdout)
+
+    def test_alchemy_export_serializes_the_full_record(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        export_start = alchemy.index("function exportRecord()")
+        export_end = alchemy.index("function summary()", export_start)
+        export_function = alchemy[export_start:export_end]
+        harness = """
+let last={inputFingerprint:"abc123",formula:{name:"Clarify the signal",sequence:["separation","distillation"],steps:[{step:1,rite:"separation"}]}};
+let blobPayload=null, clicked=false, revoked=null, scheduled=null;
+class Blob { constructor(parts,options){blobPayload={text:parts.join(""),type:options.type}} }
+const URL={createObjectURL(){return "blob:test"},revokeObjectURL(url){revoked=url}};
+const document={createElement(tag){if(tag!=="a")throw Error("Expected download link");return {href:"",download:"",click(){clicked=true}}}};
+function setTimeout(fn,ms){scheduled={fn,ms};return 1}
+""" + export_function + """
+exportRecord();
+if(!clicked) throw Error("Export did not trigger a download");
+if(!blobPayload||blobPayload.type!=="application/json") throw Error("Export did not create a JSON blob");
+const exported=JSON.parse(blobPayload.text);
+if(exported.formula.steps[0].rite!=="separation") throw Error("Export omitted the executed formula trace");
+if(!exported.formula.sequence.includes("distillation")) throw Error("Export omitted the selected sequence");
+if(scheduled.ms!==1000) throw Error("Export URL cleanup was not scheduled");
+scheduled.fn();
+if(revoked!=="blob:test") throw Error("Export URL was not revoked");
+last=null;clicked=false;exportRecord();
+if(clicked) throw Error("Export should do nothing when there is no result");
+console.log("PASS: export downloads complete JSON including formula trace and cleans up URL");
+"""
+        with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as temp:
+            temp.write(harness)
+            temp.flush()
+            result = subprocess.run(["node", temp.name], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"JSON export integration test failed:\\n{result.stdout}\\n{result.stderr}")
+        self.assertIn("PASS: export downloads complete JSON", result.stdout)
+
     def test_alchemy_reports_use_real_line_breaks(self):
         alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
         summary_start = alchemy.index("function summary()")
