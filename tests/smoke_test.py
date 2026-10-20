@@ -252,6 +252,9 @@ let last = null, workingState = null, workingFingerprint = null, operationHistor
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
 """ + engine_functions + """
 const raw = "Light and dark meet in the garden. Fire changes water, while earth holds the signal. I want to understand the pattern and integrate opposites.";
+const profileCheck = materialProfile("Alpha beta gamma. Delta epsilon.");
+if (profileCheck.sentences.length !== 2) throw Error("Sentence parser must preserve two sentences");
+if (Math.abs(profileCheck.averageSentenceLength - 2.5) > 1e-9) throw Error("Word-count parser must measure whitespace-delimited words");
 const outcomes = ["clarity","release","integrate","possibilities","embody","full"];
 for (const outcome of outcomes) {
   const plan = planFormula(raw, outcome, "balanced", "make the pattern clearer");
