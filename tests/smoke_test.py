@@ -272,6 +272,9 @@ for (const outcome of outcomes) {
     if (result.after.length !== 10 || result.after.some(v => !Number.isFinite(v) || v < 0 || v > 1)) throw Error("Invalid state after " + rite);
     state = result.after;
   }
+  const finalDistance = Math.sqrt(state.reduce((sum, value, i) => sum + Math.pow(value - plan.target[i], 2), 0) / state.length);
+  if (Math.abs(finalDistance - plan.distance) > 1e-9) throw Error("Reported final distance differs from executing selected formula for " + outcome);
+  if (Math.abs(plan.score - (1 - plan.distance)) > 1e-9) throw Error("Reported heuristic fit is inconsistent for " + outcome);
   const repeat = planFormula(raw, outcome, "balanced", "make the pattern clearer");
   if (JSON.stringify(plan.sequence) !== JSON.stringify(repeat.sequence)) throw Error("Planner is not deterministic for " + outcome);
 }
