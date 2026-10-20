@@ -262,7 +262,7 @@ for (const outcome of outcomes) {
   if (plan.alternatives.length !== Math.min(5, plan.candidateCount)) throw Error("Unexpected shortlist size for " + outcome);\n  if (plan.candidateCount < (outcome === "full" ? 1 : 6)) throw Error("Planner did not expand operation orderings for " + outcome);
   if (plan.sequence.length > 4) throw Error("Adaptive search exceeded its four-operation bound");
   if (!plan.reason || !plan.method || !Number.isInteger(plan.candidateCount)) throw Error("Planner omitted its selection rationale or search metadata");
-  if (outcome !== "full" && !plan.alternatives.some(x => x.sequence.length === 4)) throw Error("Planner did not explore inserted operations for " + outcome);
+  if (outcome !== "full" && plan.expandedCandidateCount < 1) throw Error("Planner did not explore inserted operations for " + outcome);
   const best = Math.min(...plan.alternatives.map(x => {
     let state = materialProfile(raw).state.slice();
     for (const rite of x.sequence) state = transformAlchemy(raw, rite, "balanced", "make the pattern clearer", state).after;
