@@ -241,6 +241,46 @@ class NeuroLabSmokeTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, f"Inline script {index} has a syntax error:\n{result.stderr}")
 
 
+    def test_alchemy_formula_planner_behaviour(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        start = alchemy.index("function materialProfile")
+        end = alchemy.index("function syncEngineOptions", start)
+        engine_functions = alchemy[start:end]
+        harness = """
+const $ = () => ({});
+let last = null, workingState = null, workingFingerprint = null, operationHistory = [], formulaNote = "";
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
+""" + engine_functions + """
+const raw = "Light and dark meet in the garden. Fire changes water, while earth holds the signal. I want to understand the pattern and integrate opposites.";
+const outcomes = ["clarity","release","integrate","possibilities","embody","full"];
+for (const outcome of outcomes) {
+  const plan = planFormula(raw, outcome, "balanced", "make the pattern clearer");
+  if (!plan.sequence.length || !plan.alternatives.length) throw Error("Missing plan for " + outcome);
+  if (plan.alternatives.length !== (outcome === "full" ? 1 : 3)) throw Error("Unexpected candidate count for " + outcome);
+  const best = Math.min(...plan.alternatives.map(x => {
+    let state = materialProfile(raw).state.slice();
+    for (const rite of x.sequence) state = transformAlchemy(raw, rite, "balanced", "make the pattern clearer", state).after;
+    return Math.sqrt(state.reduce((sum, value, i) => sum + Math.pow(value - plan.target[i], 2), 0) / state.length);
+  }));
+  if (Math.abs(best - plan.distance) > 1e-9) throw Error("Planner did not select the minimum-distance candidate for " + outcome);
+  let state = materialProfile(raw).state.slice();
+  for (const rite of plan.sequence) {
+    const result = transformAlchemy(raw, rite, "balanced", "make the pattern clearer", state);
+    if (result.after.length !== 10 || result.after.some(v => !Number.isFinite(v) || v < 0 || v > 1)) throw Error("Invalid state after " + rite);
+    state = result.after;
+  }
+  const repeat = planFormula(raw, outcome, "balanced", "make the pattern clearer");
+  if (JSON.stringify(plan.sequence) !== JSON.stringify(repeat.sequence)) throw Error("Planner is not deterministic for " + outcome);
+}
+console.log("PASS: six outcomes, candidate minimisation, bounded state, deterministic selection");
+"""
+        with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as temp:
+            temp.write(harness)
+            temp.flush()
+            result = subprocess.run(["node", temp.name], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"Alchemy behavioural test failed:\\n{result.stdout}\\n{result.stderr}")
+        self.assertIn("PASS: six outcomes", result.stdout)
+
     def test_veil_digital_alchemy_is_linked_local_and_syntax_valid(self):
         alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
         veil = (ROOT / "veil.html").read_text(encoding="utf-8")
