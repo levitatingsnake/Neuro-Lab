@@ -241,5 +241,26 @@ class NeuroLabSmokeTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, f"Inline script {index} has a syntax error:\n{result.stderr}")
 
 
+    def test_veil_digital_alchemy_is_linked_local_and_syntax_valid(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        veil = (ROOT / "veil.html").read_text(encoding="utf-8")
+        self.assertIn('href="./alchemy.html"', veil)
+        self.assertIn("VEIL DIGITAL ALCHEMY 001", alchemy)
+        self.assertIn("function transmute()", alchemy)
+        self.assertIn("function exportRecord()", alchemy)
+        self.assertIn("localStorage.getItem(STORE)", alchemy)
+        self.assertIn("does not contact external systems", alchemy)
+        scripts = re.findall(r"<script\\b[^>]*>(.*?)</script\\s*>", alchemy, flags=re.I | re.S)
+        self.assertTrue(scripts, "No inline scripts found in alchemy.html")
+        for index, script in enumerate(scripts, start=1):
+            if not script.strip():
+                continue
+            with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as temp:
+                temp.write(script)
+                temp.flush()
+                result = subprocess.run(["node", "--check", temp.name], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, f"Alchemy inline script {index} has a syntax error:\\n{result.stderr}")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
