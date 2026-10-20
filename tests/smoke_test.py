@@ -335,6 +335,59 @@ console.log("PASS: executed formula steps, per-step metrics and copied summary a
         self.assertEqual(result.returncode, 0, f"Formula-run integration test failed:\n{result.stdout}\n{result.stderr}")
         self.assertIn("PASS: executed formula steps", result.stdout)
 
+    def test_alchemy_manual_operations_evolve_state_and_new_material_resets_it(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        transmute_start = alchemy.index("function transmute(){const raw")
+        transmute_end = alchemy.index("function esc(s)", transmute_start)
+        transmute_function = alchemy[transmute_start:transmute_end]
+        profile_start = alchemy.index("function materialProfile")
+        profile_end = alchemy.index("function transformAlchemy", profile_start)
+        profile_function = alchemy[profile_start:profile_end]
+        transform_start = profile_end
+        transform_end = alchemy.index("function render()", transform_start)
+        transform_function = alchemy[transform_start:transform_end]
+        harness = """
+const elements = {
+  material:{value:"Fire and water. A signal emerges from the dark."},
+  engine:{value:"alchemy"}, rite:{value:"dissolution"}, intensity:{value:"balanced"},
+  intention:{value:"test continuity"}, output:{classList:{add(){},remove(){}},scrollIntoView(){}}
+};
+const $ = id => elements[id] || (elements[id]={value:"",textContent:"",classList:{add(){},remove(){},toggle(){}}});
+const $console={textContent:"",appendChild(){}};
+const document={createElement(){return {textContent:"",className:""}},querySelectorAll(){return [{classList:{toggle(){}}},{classList:{toggle(){}}}]}};
+function matchMedia(){return {matches:true}}
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
+function resetConsole(){$console.textContent=""}
+function log(s){$console.textContent += s+"\\n"}
+function render(){}
+let last=null,workingState=null,workingFingerprint=null,operationHistory=[];
+""" + profile_function + transform_function + transmute_function + """
+const seedOne=materialProfile(elements.material.value).state.slice();
+transmute();
+if(operationHistory.length!==1) throw Error("First manual operation was not recorded");
+if(JSON.stringify(operationHistory[0].before)!==JSON.stringify(seedOne)) throw Error("First operation did not start from seed");
+const afterOne=workingState.slice();
+elements.rite.value="coagulation";
+transmute();
+if(operationHistory.length!==2) throw Error("Second operation was not appended to the bench history");
+if(JSON.stringify(operationHistory[1].before)!==JSON.stringify(afterOne)) throw Error("Second operation did not start from the prior result");
+elements.material.value="A completely different pattern: earth, structure and weight.";
+const seedTwo=materialProfile(elements.material.value).state.slice();
+elements.rite.value="separation";
+transmute();
+if(operationHistory.length!==1) throw Error("Changing material failed to start a fresh operation history");
+if(JSON.stringify(operationHistory[0].before)!==JSON.stringify(seedTwo)) throw Error("New material reused the previous material's transformed state");
+if(workingFingerprint!==hash(elements.material.value)) throw Error("New material fingerprint was not updated");
+if(last.input!==elements.material.value) throw Error("Result record does not match the new material");
+console.log("PASS: operations evolve bench state and material changes reset the experiment");
+"""
+        with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as temp:
+            temp.write(harness)
+            temp.flush()
+            result = subprocess.run(["node", temp.name], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"Bench continuity integration test failed:\\n{result.stdout}\\n{result.stderr}")
+        self.assertIn("PASS: operations evolve bench state", result.stdout)
+
     def test_alchemy_reset_restores_seed_and_clears_run_state(self):
         alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
         handler_start = alchemy.index('$("resetState").onclick=()=>{')
