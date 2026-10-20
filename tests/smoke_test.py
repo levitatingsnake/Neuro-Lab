@@ -279,7 +279,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("rarer shared words", veil)
         self.assertIn("function exportRecord()", alchemy)
         self.assertIn("Your text is not transmitted by this page.", alchemy)
-        self.assertIn("not execution on quantum hardware", alchemy)
+        self.assertIn("not a physical or supernatural transmutation", alchemy)
         for page_name, page in (("veil.html", veil), ("alchemy.html", alchemy)):
             scripts = re.findall(r"<script\b[^>]*>(.*?)</script\s*>", page, flags=re.I | re.S)
             self.assertTrue(scripts, f"No inline scripts found in {page_name}")
