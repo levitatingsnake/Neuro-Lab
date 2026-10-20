@@ -253,7 +253,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("function planFormula", alchemy)
         self.assertIn("target-state fit", alchemy)
         self.assertIn("Alternative sequences compared", alchemy)
-        self.assertIn("heuristic, not a probability", alchemy)
+        self.assertIn("Heuristic fit, not a probability", alchemy)
         self.assertIn("distanceToGoal", alchemy)
         self.assertIn("moved closer to the target profile", alchemy)
         self.assertIn("moved farther from the target profile", alchemy)
