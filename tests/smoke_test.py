@@ -249,6 +249,8 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn("function transmute()", alchemy)
         self.assertIn("function links(){const a=d.observations", veil)
         self.assertIn("rarityScore", veil)
+        self.assertIn("gapDays", veil)
+        self.assertIn("Time separation:", veil)
         self.assertIn("SAME DATE", veil)
         self.assertIn("rarer shared words", veil)
         self.assertIn("function exportRecord()", alchemy)
