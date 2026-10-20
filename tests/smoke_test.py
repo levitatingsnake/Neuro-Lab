@@ -84,7 +84,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
 
     def test_mind_progress_insights_use_recent_checkins_and_reflection_count(self):
         self.assertIn('const recent=entries.slice(-3)', self.html)
-        self.assertIn('const recentTotal=recent.length', self.html)
+        self.assertRegex(self.html, r'\\brecentTotal\\s*=\\s*recent\\.length')
         self.assertIn('label:"Reflections",value:String(reflectionCount)', self.html)
         self.assertIn('Your recent check-ins more often say the step helped.', self.html)
         self.assertIn('Your recent check-ins show friction or difficulty.', self.html)
