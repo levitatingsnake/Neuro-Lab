@@ -287,6 +287,52 @@ console.log("PASS: six outcomes, candidate minimisation, bounded state, determin
         self.assertEqual(result.returncode, 0, f"Alchemy behavioural test failed:\\n{result.stdout}\\n{result.stderr}")
         self.assertIn("PASS: six outcomes", result.stdout)
 
+    def test_alchemy_formula_run_records_each_executed_step(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        engine_start = alchemy.index("function materialProfile")
+        engine_end = alchemy.index("function syncEngineOptions", engine_start)
+        engine_functions = alchemy[engine_start:engine_end]
+        summary_start = alchemy.index("function summary()")
+        summary_end = alchemy.index("function planFormula", summary_start)
+        summary_function = alchemy[summary_start:summary_end]
+        harness = """
+const elements = {
+  engine: {value:"alchemy"}, outcome:{value:"clarity"}, intensity:{value:"balanced"},
+  intention:{value:"clarify"}, material:{value:"Light and dark meet. Fire changes water and earth holds the signal."},
+  rite:{value:"transmute"}
+};
+const $ = id => elements[id] || (elements[id] = {value:"", textContent:"", classList:{add(){},remove(){}}});
+const $console = {textContent:""};
+let last = null, workingState = null, workingFingerprint = null, operationHistory = [];
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
+function render(){}
+function transmute(){
+  const raw=$("material").value.trim(), rite=$("rite").value, intensity=$("intensity").value, intention=$("intention").value;
+  const result=transformAlchemy(raw,rite,intensity,intention,workingState);
+  workingState=result.after.slice();
+  operationHistory.push({step:operationHistory.length+1,rite,intensity,intention,before:result.before.slice(),after:result.after.slice(),trace:result.trace.map(x=>({name:x.name,detail:x.detail}))});
+  last={engine:{type:"local symbolic transformation engine"},inputFingerprint:hash(raw),settings:{rite,intensity},operations:result.trace,transformation:{dimensions:result.after.map((v,i)=>({label:"dimension "+i,before:result.before[i],after:v}))}};
+}
+""" + engine_functions + summary_function + """
+runFormula();
+if (!last || !last.formula) throw Error("Formula result was not recorded");
+if (last.formula.steps.length !== last.formula.sequence.length) throw Error("Step trace length differs from executed formula");
+for (let i=0;i<last.formula.steps.length;i++) {
+  const step=last.formula.steps[i], entry=operationHistory[i];
+  if (step.rite !== entry.rite || step.step !== i+1) throw Error("Step trace does not match actual operation history");
+  if (Math.abs(step.beforeDistance-step.afterDistance-step.improvement)>0.00011) throw Error("Step improvement metric is inconsistent");
+}
+const report=summary();
+if (!report.includes("Step 1 (") || !report.includes("Selected formula:")) throw Error("Copied summary omits the executed formula trace");
+console.log("PASS: executed formula steps, per-step metrics and copied summary agree");
+"""
+        with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as temp:
+            temp.write(harness)
+            temp.flush()
+            result = subprocess.run(["node", temp.name], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"Formula-run integration test failed:\n{result.stdout}\n{result.stderr}")
+        self.assertIn("PASS: executed formula steps", result.stdout)
+
     def test_alchemy_reports_use_real_line_breaks(self):
         alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
         summary_start = alchemy.index("function summary()")
