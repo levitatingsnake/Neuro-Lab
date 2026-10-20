@@ -287,6 +287,17 @@ console.log("PASS: six outcomes, candidate minimisation, bounded state, determin
         self.assertEqual(result.returncode, 0, f"Alchemy behavioural test failed:\\n{result.stdout}\\n{result.stderr}")
         self.assertIn("PASS: six outcomes", result.stdout)
 
+    def test_alchemy_reports_use_real_line_breaks(self):
+        alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
+        summary_start = alchemy.index("function summary()")
+        summary_end = alchemy.index("function planFormula", summary_start)
+        summary = alchemy[summary_start:summary_end]
+        run_start = alchemy.index("function runFormula()")
+        run_end = alchemy.index("function syncEngineOptions", run_start)
+        run_formula = alchemy[run_start:run_end]
+        self.assertNotIn(r"\\n", summary, "Copied/exported summaries must contain real line breaks, not literal backslash-n text")
+        self.assertNotIn(r"\\n", run_formula, "Formula progress and completion messages must contain real line breaks")
+
     def test_veil_digital_alchemy_is_linked_local_and_syntax_valid(self):
         alchemy = (ROOT / "alchemy.html").read_text(encoding="utf-8")
         veil = (ROOT / "veil.html").read_text(encoding="utf-8")
