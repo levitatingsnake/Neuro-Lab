@@ -350,6 +350,7 @@ const elements = {
   console:{textContent:"old result"}, resetState:{}, rite:{value:"rubedo"}
 };
 const $ = id => elements[id] || (elements[id]={value:"",textContent:"",classList:{add(){},remove(){}}});
+const $console = elements.console;
 const document = {querySelectorAll(){return [{classList:{remove(){}}},{classList:{remove(){}}}]}};
 let last={old:true}, workingState=[0.1,0.2], workingFingerprint="old", operationHistory=[{rite:"rubedo"}];
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(16).padStart(8,"0")}
