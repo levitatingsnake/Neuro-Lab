@@ -1,0 +1,495 @@
+{
+  "schema_version": "1.0",
+  "release": "2026-10-26",
+  "purpose": "Source-grounded comparative Oracle, not an authority or supernatural predictor",
+  "engines": "curated_deterministic_v1",
+  "disclaimer": "All Oracle responses are original interpretive questions inspired by historical thought, never authentic speech or quotations. Source links are for independent verification. Personal exercises optional and low-intensity.",
+  "figures": [
+    {
+      "id": "crowley",
+      "name": "Aleister Crowley",
+      "years": "1875–1947",
+      "eyebrow": "THELEMA • SCIENTIFIC ILLUMINISM",
+      "tagline": "Will, symbolism, the disciplined magical record",
+      "centres": [
+        "True Will",
+        "The Book of the Law",
+        "Liber 777",
+        "Qabalah and Tarot",
+        "Yoga and attention",
+        "Magical diaries",
+        "Historical ethics"
+      ],
+      "discussion": "Crowley's esoteric methods combined ritual, symbolic synthesis, yoga and detailed first-person recording. A record is useful; its supernatural explanation must be evaluated separately.",
+      "study": [
+        "Thelema and its historical context",
+        "True Will and ethics",
+        "Ritual as symbolic action",
+        "The magical record",
+        "Tarot and Frieda Harris",
+        "Yoga and cultural transmission",
+        "Critical synthesis"
+      ],
+      "warning": "His history and teachings involve power, sex, drugs and extreme practices. Do not emulate high-risk procedures."
+    },
+    {
+      "id": "gurdjieff",
+      "name": "G. I. Gurdjieff",
+      "years": "c. 1866–1949; birth year disputed",
+      "eyebrow": "FOURTH WAY • THE WORK",
+      "tagline": "Self-remembering, automaticity, the everyday Work",
+      "centres": [
+        "Self-remembering",
+        "Self-observation",
+        "Mechanicality",
+        "The Fourth Way",
+        "Centres/functions",
+        "Movements and music",
+        "Enneagram as symbol"
+      ],
+      "discussion": "Gurdjieff's teachings investigate how habitual thoughts and reactions can dominate experience, and whether attention can be developed in daily life. Treat his model of centres as a historical framework.",
+      "study": [
+        "Primary writings versus pupil records",
+        "Mechanical habits",
+        "Self-observation",
+        "Self-remembering",
+        "The centres model",
+        "Music and movement lineage",
+        "Critical synthesis"
+      ],
+      "warning": "No coercive group dynamics, sleep deprivation, strenuous 'shocks' or self-criticism rituals."
+    },
+    {
+      "id": "osho",
+      "name": "Osho (Rajneesh)",
+      "years": "1931–1990",
+      "eyebrow": "MEDITATION • REBELLION",
+      "tagline": "Witnessing, spontaneity, liberation from conditioning",
+      "centres": [
+        "Witnessing",
+        "Social conditioning",
+        "Meditation",
+        "Playfulness",
+        "Individual freedom",
+        "Contradiction",
+        "Critical history"
+      ],
+      "discussion": "Osho's extensive recorded discourses ranged across meditation, individual freedom and critiques of traditional religion. His later movement and conduct require independent critical historical examination, not devotional treatment.",
+      "study": [
+        "Biographical and movement context",
+        "Witnessing as a theme",
+        "Social scripts and identity",
+        "Creative spontaneity",
+        "Gentle observation, not Dynamic Meditation",
+        "Historical controversies and accountability",
+        "Critical synthesis"
+      ],
+      "warning": "Rights controlled. Do not copy discourses, protected recordings or trademarked program materials; avoid strenuous or hyperventilation-based techniques."
+    },
+    {
+      "id": "krishnamurti",
+      "name": "J. Krishnamurti",
+      "years": "1895–1986",
+      "eyebrow": "CHOICELESS AWARENESS • INQUIRY",
+      "tagline": "Freedom from authority, conditioning and mental images",
+      "centres": [
+        "Truth is a pathless land",
+        "The observer and the observed",
+        "Conditioning",
+        "Choiceless awareness",
+        "Relationship",
+        "Fear and comparison",
+        "Inquiry without gurus"
+      ],
+      "discussion": "Krishnamurti argued against spiritual authorities and fixed paths to truth. His own teachings are an essential test of whether our Oracle produces independent thought or replaces it.",
+      "study": [
+        "Dissolution of the Order of the Star",
+        "Freedom from teachers",
+        "Observer and observed",
+        "Conditioning and image",
+        "Relationship",
+        "Attention without a prescribed path",
+        "Critical synthesis"
+      ],
+      "warning": "Do not turn his anti-guru challenge into another compulsory doctrine or prescribed attainment."
+    }
+  ],
+  "source_catalog": [
+    {
+      "id": "source-01",
+      "school": "Crowley",
+      "title": "Liber AL vel Legis",
+      "url": "https://oto-usa.org/thelema/crowley/",
+      "note": "Primary scripture, claimed reception in 1904; exact edition and rights need checking.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-02",
+      "school": "Crowley",
+      "title": "Magick in Theory and Practice",
+      "url": "https://oto-usa.org/thelema/crowley/",
+      "note": "Primary systematic writing. Historical practices and claims require critical separation.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-03",
+      "school": "Crowley",
+      "title": "Liber 777",
+      "url": "https://oto-usa.org/thelema/crowley/",
+      "note": "Symbolic correspondences, not a scientifically established map of reality.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-04",
+      "school": "Crowley",
+      "title": "The Book of Thoth",
+      "url": "https://oto-usa.org/thelema/crowley/",
+      "note": "Tarot work; credit Frieda Harris for visual collaboration and respect artwork rights.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-05",
+      "school": "Gurdjieff",
+      "title": "Beelzebub's Tales to His Grandson",
+      "url": "https://gurdjieff.com/publications/",
+      "note": "Author's first series, posthumously published 1950; literary allegory.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-06",
+      "school": "Gurdjieff",
+      "title": "Meetings with Remarkable Men",
+      "url": "https://gurdjieff.com/publications/",
+      "note": "Author's second series; autobiographical literary narrative, not independent proof.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-07",
+      "school": "Gurdjieff",
+      "title": "Views from the Real World",
+      "url": "https://gurdjieff.com/publications/",
+      "note": "Edited pupils' notes, not necessarily verbatim Gurdjieff.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-08",
+      "school": "Gurdjieff",
+      "title": "In Search of the Miraculous",
+      "url": "https://gurdjieff.com/publications/",
+      "note": "P. D. Ouspensky's influential account, distinctly a pupil's work.",
+      "source_role": "pupil_account",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-09",
+      "school": "Osho",
+      "title": "OSHO International Foundation: archive and biography",
+      "url": "https://osho-international-foundation.com/osho/",
+      "note": "Recordings and books derive largely from spoken discourses; rights controlled.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-10",
+      "school": "Osho",
+      "title": "OSHO Foundation rights notice",
+      "url": "https://osho-international-foundation.com/?page_id=37",
+      "note": "Rights restrictions for reproduction and adaptation; catalogue link only.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-11",
+      "school": "Osho",
+      "title": "Osho's active meditation tradition",
+      "url": "https://shop.osho.com/en/music-for-osho-meditations/osho-dynamic-meditation-mp3",
+      "note": "Descriptive archive. Intense breathwork, exertion, catharsis and exhaustion are NOT recommended as casual app exercises.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-12",
+      "school": "Krishnamurti",
+      "title": "Introduction to Teachings",
+      "url": "https://www.kfa.org/introduction-teachings/",
+      "note": "Foundation introduction; freedom, conditioning, challenge to spiritual authority.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-13",
+      "school": "Krishnamurti",
+      "title": "The Observer and the Observed",
+      "url": "https://kfoundation.org/the-observer-and-the-observed/",
+      "note": "Curated talks on the observer and the observed; interpret without quoting extensively.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    },
+    {
+      "id": "source-14",
+      "school": "Krishnamurti",
+      "title": "Dialogue 2, San Diego, 1974",
+      "url": "https://kfoundation.org/transcript/dialogue-2-san-diego-california-18-february-1974/",
+      "note": "Foundation-hosted original transcript, linked not mirrored.",
+      "source_role": "historical_or_foundation_source",
+      "full_text_included": false,
+      "reuse": "link_metadata_only_pending_rights"
+    }
+  ],
+  "topic_views": {
+    "Attention": {
+      "Crowley": {
+        "lens": "Experiment and record",
+        "prompt": "What happens if you turn this question into one small, carefully logged experiment instead of accepting your first interpretation?",
+        "action": "Write a prediction, try a gentle five-minute attention exercise, and note what actually happened.",
+        "caveat": "A personal experience is not proof of occult causation."
+      },
+      "Gurdjieff": {
+        "lens": "Catch the automatic reaction",
+        "prompt": "Which part of your response is habitual, and can you notice it before you intervene?",
+        "action": "During one everyday task, observe your thought, emotion and body for thirty seconds.",
+        "caveat": "Gurdjieff's centres are a traditional model, not confirmed neural subsystems."
+      },
+      "Osho": {
+        "lens": "Witness the experience",
+        "prompt": "Could you observe this experience with curiosity instead of immediately trying to control it?",
+        "action": "Sit comfortably for two minutes and notice sensations and passing thoughts without strain.",
+        "caveat": "This is a gentle independent reflection, not a reproduction of any proprietary meditation system."
+      },
+      "Krishnamurti": {
+        "lens": "Investigate the observer",
+        "prompt": "Is the one who is judging separate from the thoughts and images being judged?",
+        "action": "Notice one judgement in the present moment without trying to force it away.",
+        "caveat": "Krishnamurti questioned the authority of methods and teachers. Treat this as inquiry, not a prescribed doctrine."
+      }
+    },
+    "Direction": {
+      "Crowley": {
+        "lens": "Will versus impulse",
+        "prompt": "If the immediate reward disappeared, which part of this intention would remain?",
+        "action": "Write three enduring commitments and three short-lived impulses. Compare without rushing to declare a True Will.",
+        "caveat": "True Will is a religious/philosophical concept, not an objective diagnostic."
+      },
+      "Gurdjieff": {
+        "lens": "Choice or automaticity?",
+        "prompt": "Is this direction deliberately chosen, or inherited from habit, approval and fear?",
+        "action": "Identify one recurring cue that pushes you into an automatic decision.",
+        "caveat": "Avoid taking 'asleep' as a literal diagnosis of yourself or anyone else."
+      },
+      "Osho": {
+        "lens": "Aliveness and authenticity",
+        "prompt": "How much of this goal comes from genuine curiosity rather than a need to perform an identity for others?",
+        "action": "Name one low-pressure way to explore the idea that leaves you freer to change your mind.",
+        "caveat": "This is our interpretation of themes in Osho's talks, not his words."
+      },
+      "Krishnamurti": {
+        "lens": "Freedom from becoming",
+        "prompt": "Is pursuit of the ideal preventing you from seeing what is actually happening now?",
+        "action": "Describe the situation without comparison to who you think you should become.",
+        "caveat": "He rejected spiritual dependence and fixed routes to truth."
+      }
+    },
+    "Conditioning": {
+      "Crowley": {
+        "lens": "Inherited scripts",
+        "prompt": "Are inherited moral rules or symbolic associations defining a decision without examination?",
+        "action": "Choose one assumption and trace where you learned it.",
+        "caveat": "Questioning a belief is not a reason to disregard consent or obligations."
+      },
+      "Gurdjieff": {
+        "lens": "Mechanics of a pattern",
+        "prompt": "Which stimulus, feeling and habitual movement repeat whenever this pattern appears?",
+        "action": "Log a single low-stakes pattern as cue, action and result.",
+        "caveat": "Do not confuse self-observation with relentless self-surveillance."
+      },
+      "Osho": {
+        "lens": "Social mask",
+        "prompt": "Where are you acting out a borrowed identity rather than responding to your actual needs?",
+        "action": "Journal one situation in which you felt free to be spontaneous.",
+        "caveat": "Osho's organisations and historical controversies should also be critically researched."
+      },
+      "Krishnamurti": {
+        "lens": "Conditioning and image",
+        "prompt": "Can you detect the mental image through which you are interpreting this experience?",
+        "action": "Notice a label that arises, then look again without treating the label as the whole truth.",
+        "caveat": "Do not replace one ideology with a new guru."
+      }
+    },
+    "Relationships": {
+      "Crowley": {
+        "lens": "Will and ethics",
+        "prompt": "How could you pursue what matters to you while fully respecting another person's agency?",
+        "action": "Write the boundaries and consent requirements for a hypothetical choice.",
+        "caveat": "Historical sexual and power practices warrant independent ethical criticism."
+      },
+      "Gurdjieff": {
+        "lens": "Mechanical conflict",
+        "prompt": "Which familiar reaction takes over before you actually hear the other person?",
+        "action": "Recall a mild disagreement and name the first bodily reaction, without judging yourself.",
+        "caveat": "Never use group pressure, humiliation or coercion as an alleged teaching method."
+      },
+      "Osho": {
+        "lens": "Attachment and freedom",
+        "prompt": "Are you connecting with this person as they are, or trying to make them meet an expectation?",
+        "action": "Write two things you appreciate without asking the person to change.",
+        "caveat": "Do not use spiritual ideas to justify crossing boundaries."
+      },
+      "Krishnamurti": {
+        "lens": "Relationship without fixed images",
+        "prompt": "Is the image you carry of the other person obscuring what they are actually communicating?",
+        "action": "Identify a long-standing assumption and hold it provisionally.",
+        "caveat": "His teachings are prompts for examination, not a verdict on your relationship."
+      }
+    },
+    "Creativity": {
+      "Crowley": {
+        "lens": "Symbolic recombination",
+        "prompt": "What unexpected connection appears if you treat two distant symbols as a creative vocabulary?",
+        "action": "Pair two symbols and invent three testable creative possibilities without assuming magical correspondence.",
+        "caveat": "A symbol generates hypotheses; it does not validate them."
+      },
+      "Gurdjieff": {
+        "lens": "Break the automatic sequence",
+        "prompt": "Where has repetition reduced your possible responses to one predictable pathway?",
+        "action": "Change the order of a harmless routine and note what new detail becomes apparent.",
+        "caveat": "Novelty alone is not self-development."
+      },
+      "Osho": {
+        "lens": "Play without performance",
+        "prompt": "What might you make if you suspended the pressure for it to be useful immediately?",
+        "action": "Play for five minutes with a sketch, phrase or musical idea, then keep only what feels worth exploring.",
+        "caveat": "This is not evidence for metaphysical creativity claims."
+      },
+      "Krishnamurti": {
+        "lens": "Seeing without the template",
+        "prompt": "Can this be observed before naming, categorising and forcing it into a known model?",
+        "action": "Look closely at an everyday object for thirty seconds and describe one previously unnoticed feature.",
+        "caveat": "Freedom from preconception is not freedom from facts."
+      }
+    },
+    "Uncertainty": {
+      "Crowley": {
+        "lens": "Separate observation and interpretation",
+        "prompt": "Which part of the strange result is directly documented and which part is your preferred explanation?",
+        "action": "Keep four columns: observation, interpretation, alternative explanation, next test.",
+        "caveat": "The supernatural explanation remains a hypothesis unless independently substantiated."
+      },
+      "Gurdjieff": {
+        "lens": "Observe the urge for certainty",
+        "prompt": "What mechanical reaction does not-knowing provoke in you?",
+        "action": "Notice the impulse to answer immediately and leave one question unresolved for a moment.",
+        "caveat": "Not every mystery hides a deeper order."
+      },
+      "Osho": {
+        "lens": "Allowing ambiguity",
+        "prompt": "Can you encounter the unknown with alertness and play rather than dread or a need for a final answer?",
+        "action": "Write what is known, what is possible and what would change your mind.",
+        "caveat": "Comfort with mystery does not justify unsupported claims."
+      },
+      "Krishnamurti": {
+        "lens": "Question the authority of answers",
+        "prompt": "Do you want to find out, or have an authority remove uncertainty for you?",
+        "action": "Frame one clear question whose answer you would be willing to revise.",
+        "caveat": "The Oracle is not an authority. Your scrutiny comes first."
+      }
+    }
+  },
+  "topic_keywords": {
+    "Attention": [
+      "mind",
+      "focus",
+      "meditat",
+      "present",
+      "attention",
+      "awake",
+      "conscious",
+      "aware",
+      "sleep"
+    ],
+    "Direction": [
+      "direction",
+      "purpose",
+      "will",
+      "goal",
+      "work",
+      "career",
+      "decid",
+      "should",
+      "want",
+      "future"
+    ],
+    "Conditioning": [
+      "habit",
+      "fear",
+      "pattern",
+      "condition",
+      "belief",
+      "ego",
+      "identity",
+      "anxiety",
+      "stuck"
+    ],
+    "Relationships": [
+      "relationship",
+      "love",
+      "partner",
+      "friend",
+      "family",
+      "conflict",
+      "people",
+      "trust"
+    ],
+    "Creativity": [
+      "creat",
+      "inven",
+      "idea",
+      "art",
+      "music",
+      "new",
+      "original",
+      "novel"
+    ],
+    "Uncertainty": [
+      "unknown",
+      "truth",
+      "evidence",
+      "myster",
+      "reality",
+      "dimension",
+      "alien",
+      "conspiracy",
+      "uncertain",
+      "what if"
+    ]
+  },
+  "evidence_taxonomy": [
+    "primary_work",
+    "contemporary_account",
+    "later_interpretation",
+    "historical_claim",
+    "experimental_study",
+    "independent_replication",
+    "synthetic_oracle_prompt"
+  ],
+  "rights_policy": "Bibliographic descriptions and original summaries only. No full text, artwork, recordings or impersonation; all edition-specific rights must be evaluated before reuse."
+}
