@@ -1,0 +1,376 @@
+{
+  "project": "NEURO//LAB",
+  "collection": "Anomalous Knowledge Archive: verified live sample",
+  "schema_version": "1.0",
+  "created_on": "2026-10-26",
+  "notice": "Read-only bibliographic sample: sources are linked, not copied. Historical claims remain unverified and disputed. Full 66-record research package is separate.",
+  "items": [
+    {
+      "id": "duke-rhine",
+      "title": "Duke Parapsychology Laboratory records",
+      "authors": [
+        "J. B. Rhine",
+        "Louisa E. Rhine"
+      ],
+      "year": 1919,
+      "tags": [
+        "telepathy",
+        "esp",
+        "Rhine",
+        "archives"
+      ],
+      "evidence_category": "archival record",
+      "ingest_policy": "index only",
+      "editorial_note": "Original laboratory research files and correspondence; reproductions require permission.",
+      "source_url": "https://guides.library.duke.edu/c.php?g=1507142&p=11267980"
+    },
+    {
+      "id": "garrett",
+      "title": "Eileen J. Garrett Research Library at UMBC",
+      "authors": [
+        "Parapsychology Foundation"
+      ],
+      "year": 2022,
+      "tags": [
+        "mediumship",
+        "psychic",
+        "research",
+        "archive"
+      ],
+      "evidence_category": "archival record",
+      "ingest_policy": "index only",
+      "editorial_note": "More than 12,000 volumes and 100 periodicals; reading-room access, not a free redistribution licence.",
+      "source_url": "https://parapsychology.org/library-basics/"
+    },
+    {
+      "id": "burr-ms1283",
+      "title": "Harold Saxton Burr Papers MS 1283",
+      "authors": [
+        "Harold Saxton Burr"
+      ],
+      "year": 1940,
+      "tags": [
+        "aura",
+        "bioelectric",
+        "trees",
+        "field"
+      ],
+      "evidence_category": "archival record",
+      "ingest_policy": "index only",
+      "editorial_note": "Original electrodynamic research notebooks on trees, 1940–1959; Yale states that copyright status is unknown.",
+      "source_url": "https://hdl.handle.net/10079/fa/mssa.ms.1283"
+    },
+    {
+      "id": "burr-1937",
+      "title": "Bio-Electric Correlates of Human Ovulation",
+      "authors": [
+        "H. S. Burr",
+        "L. K. Musselman",
+        "D. Barton",
+        "N. B. Kelly"
+      ],
+      "year": 1937,
+      "tags": [
+        "aura",
+        "bioelectric",
+        "physiology"
+      ],
+      "evidence_category": "historical experiment",
+      "ingest_policy": "index only",
+      "editorial_note": "Recorded measurable tissue potentials; not a validated diagnostic test or proof of supernatural auras.",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2601785/"
+    },
+    {
+      "id": "burr-1939",
+      "title": "Evidence for an Electro-Dynamic Field in Living Organisms",
+      "authors": [
+        "H. S. Burr",
+        "F. S. C. Northrop"
+      ],
+      "year": 1939,
+      "tags": [
+        "aura",
+        "bioelectric",
+        "electrodynamic",
+        "theory"
+      ],
+      "evidence_category": "historical experiment",
+      "ingest_policy": "index only",
+      "editorial_note": "Proposes a field-based interpretation of living-system electrical gradients; the interpretation remains separate from observations.",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1077770/"
+    },
+    {
+      "id": "burr-1941",
+      "title": "Field Properties of the Developing Frog’s Egg",
+      "authors": [
+        "Harold Saxton Burr"
+      ],
+      "year": 1941,
+      "tags": [
+        "bioelectric",
+        "embryos"
+      ],
+      "evidence_category": "historical experiment",
+      "ingest_policy": "index only",
+      "editorial_note": "Original published embryological investigation.",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1078321/"
+    },
+    {
+      "id": "vasiliev-rsl",
+      "title": "Mysterious Phenomena of the Human Psyche (Russian edition)",
+      "authors": [
+        "Leonid Vasiliev"
+      ],
+      "year": 1963,
+      "tags": [
+        "soviet",
+        "telepathy",
+        "hypnosis",
+        "suggestion"
+      ],
+      "evidence_category": "historical book",
+      "ingest_policy": "index only",
+      "editorial_note": "Russian State Library catalogues an original-language edition; viewer access is not a copying licence.",
+      "source_url": "https://search.rsl.ru/ru/record/01005998043"
+    },
+    {
+      "id": "vasiliev-wellcome",
+      "title": "Experiments in Mental Suggestion (English translation)",
+      "authors": [
+        "Leonid Vasiliev"
+      ],
+      "year": 1963,
+      "tags": [
+        "soviet",
+        "telepathy",
+        "hypnosis",
+        "suggestion"
+      ],
+      "evidence_category": "historical book",
+      "ingest_policy": "index only",
+      "editorial_note": "English translation held by Wellcome; not freely redistributable.",
+      "source_url": "https://wellcomecollection.org/works/ygf3wazt"
+    },
+    {
+      "id": "sri-soviet",
+      "title": "Perceptual Augmentation Techniques, Part Two",
+      "authors": [
+        "Stanford Research Institute"
+      ],
+      "year": 1975,
+      "tags": [
+        "soviet",
+        "telepathy",
+        "remote",
+        "viewing",
+        "hypnosis"
+      ],
+      "evidence_category": "declassified report",
+      "ingest_policy": "index only",
+      "editorial_note": "Historical intelligence-linked research discussing Vasiliev and Kogan. Declassification is not validation of their claims.",
+      "source_url": "https://www.cia.gov/readingroom/document/cia-rdp96-00791r000300030003-0"
+    },
+    {
+      "id": "ullman-1966",
+      "title": "An Experimental Approach to Dreams and Telepathy",
+      "authors": [
+        "Montague Ullman"
+      ],
+      "year": 1966,
+      "tags": [
+        "dream",
+        "telepathy",
+        "maimonides",
+        "REM"
+      ],
+      "evidence_category": "historical experiment",
+      "ingest_policy": "index only",
+      "editorial_note": "Original laboratory methodology and preliminary findings.",
+      "source_url": "https://jamanetwork.com/journals/jamapsychiatry/article-abstract/489052"
+    },
+    {
+      "id": "dream-1969",
+      "title": "Telepathic Perception in the Dream State",
+      "authors": [
+        "Stanley Krippner",
+        "Montague Ullman"
+      ],
+      "year": 1969,
+      "tags": [
+        "dream",
+        "telepathy",
+        "maimonides",
+        "REM"
+      ],
+      "evidence_category": "historical experiment",
+      "ingest_policy": "index only",
+      "editorial_note": "Reported positive results from EEG-monitored dream comparison; not independently established telepathy.",
+      "source_url": "https://journals.sagepub.com/doi/10.2466/pms.1969.29.3.915"
+    },
+    {
+      "id": "dream-1970",
+      "title": "Telepathy and Dreams: A Controlled Experiment",
+      "authors": [
+        "Stanley Krippner",
+        "Montague Ullman"
+      ],
+      "year": 1970,
+      "tags": [
+        "dream",
+        "telepathy",
+        "maimonides",
+        "EEG"
+      ],
+      "evidence_category": "historical experiment",
+      "ingest_policy": "index only",
+      "editorial_note": "Journal-indexed controlled experiment and method.",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/5483125/"
+    },
+    {
+      "id": "dream-reviews",
+      "title": "Maimonides Dream Telepathy: Independent Replications",
+      "authors": [
+        "Society for Psychical Research contributors"
+      ],
+      "year": 2023,
+      "tags": [
+        "dream",
+        "telepathy",
+        "replication",
+        "criticism"
+      ],
+      "evidence_category": "critical review",
+      "ingest_policy": "index only",
+      "editorial_note": "Summary includes disputed replication evidence and methodological criticisms.",
+      "source_url": "https://open-data.spr.ac.uk/articles/maimonides-dream-telepathy-research/"
+    },
+    {
+      "id": "pear-replication",
+      "title": "PEAR random-event-generator consortium replication",
+      "authors": [
+        "PEAR and participating laboratories"
+      ],
+      "year": 2000,
+      "tags": [
+        "psychokinesis",
+        "RNG",
+        "null",
+        "results"
+      ],
+      "evidence_category": "replication",
+      "ingest_policy": "index only",
+      "editorial_note": "A multi-laboratory attempt did not reproduce the primary effect at conventional significance.",
+      "source_url": "https://open-data.spr.ac.uk/articles/princeton-engineering-anomalies-research-pear/"
+    },
+    {
+      "id": "micro-pk-2018",
+      "title": "Intentional Observer Effects on Quantum Randomness",
+      "authors": [
+        "Independent experimental team"
+      ],
+      "year": 2018,
+      "tags": [
+        "psychokinesis",
+        "RNG",
+        "null",
+        "results"
+      ],
+      "evidence_category": "replication",
+      "ingest_policy": "index only",
+      "editorial_note": "Reports evidence against the micro-psychokinesis hypothesis.",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5872141/"
+    },
+    {
+      "id": "kilner",
+      "title": "The Human Atmosphere",
+      "authors": [
+        "Walter J. Kilner"
+      ],
+      "year": 1911,
+      "tags": [
+        "aura",
+        "original",
+        "illustrations"
+      ],
+      "evidence_category": "historical book",
+      "ingest_policy": "public-domain candidate",
+      "editorial_note": "Illustrated historical aura experiments and diagrams; medical/psychic claims unverified.",
+      "source_url": "https://wellcomecollection.org/works/t94es3zc"
+    },
+    {
+      "id": "thought-forms",
+      "title": "Thought-Forms",
+      "authors": [
+        "Annie Besant",
+        "C. W. Leadbeater"
+      ],
+      "year": 1901,
+      "tags": [
+        "aura",
+        "thought",
+        "forms",
+        "occult"
+      ],
+      "evidence_category": "historical book",
+      "ingest_policy": "public-domain candidate",
+      "editorial_note": "Illustrated symbolic classification of claimed thought colours and forms.",
+      "source_url": "https://www.gutenberg.org/ebooks/16269"
+    },
+    {
+      "id": "ganzfeld",
+      "title": "Ganzfeld Research Database",
+      "authors": [
+        "Research consortium"
+      ],
+      "year": 2019,
+      "tags": [
+        "telepathy",
+        "ganzfeld",
+        "data"
+      ],
+      "evidence_category": "research dataset",
+      "ingest_policy": "permission check",
+      "editorial_note": "Downloadable study metadata; effect interpretation disputed, redistribution terms need review.",
+      "source_url": "https://zenodo.org/records/14293732"
+    },
+    {
+      "id": "cia-stargate",
+      "title": "CIA STARGATE collection",
+      "authors": [
+        "US government and contractors"
+      ],
+      "year": 1995,
+      "tags": [
+        "remote",
+        "viewing",
+        "CIA",
+        "secret",
+        "history"
+      ],
+      "evidence_category": "declassified archive",
+      "ingest_policy": "index only",
+      "editorial_note": "Declassified records document official investigation, not demonstration of psychic functioning.",
+      "source_url": "https://www.cia.gov/readingroom/collection/stargate"
+    },
+    {
+      "id": "kirlian",
+      "title": "Image Modulation in Corona Discharge Photography",
+      "authors": [
+        "J. O. Pehek",
+        "H. J. Kyler",
+        "D. L. Faust"
+      ],
+      "year": 1976,
+      "tags": [
+        "aura",
+        "kirlian",
+        "corona",
+        "discharge"
+      ],
+      "evidence_category": "empirical explanation",
+      "ingest_policy": "index only",
+      "editorial_note": "Explains optical variations through discharge, moisture and other physical conditions.",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/968480/"
+    }
+  ]
+}
