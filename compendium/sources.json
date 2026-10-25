@@ -1,0 +1,1136 @@
+{
+  "schema_version": "1.1",
+  "project": "NEURO//LAB",
+  "collection": "Anomalous Knowledge Archive",
+  "created_on": "2026-10-26",
+  "notice": "Bibliographic metadata, links and original summaries only; remote-viewing, telepathy and aura claims are not presented as established facts. No copyrighted source PDFs have been imported.",
+  "ingest_policies": {
+    "fulltext_candidate": "Original historical work/asset has a strong public domain indication, but verify this edition, attribution and NZ/worldwide rights before mirroring.",
+    "source_only_pending_edition": "Original old work may be public domain, but a particular transcription or scanned edition has not passed reuse check.",
+    "index_only": "Save author, citation, link and research notes only. Do not copy source documents.",
+    "research_data_permission_check": "Data can be accessed for research, but licence and provider usage terms require a separate check before republishing.",
+    "licensed_after_credit": "Source claims a permissive attribution licence; check exact version/asset and retain credit."
+  },
+  "items": [
+    {
+      "id": "kilner-1911",
+      "title": "The Human Atmosphere, or, The Aura Made Visible by the Aid of Chemical Screens",
+      "year": 1911,
+      "type": "historical_book",
+      "authors": [
+        "Walter J. Kilner"
+      ],
+      "tags": [
+        "aura",
+        "chemical_screens",
+        "perception"
+      ],
+      "source_url": "https://wellcomecollection.org/works/t94es3zc",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Historical aura descriptions, diagrams and case records. Aura diagnostic claims unverified.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "besant-leadbeater-1901",
+      "title": "Thought-Forms",
+      "year": 1901,
+      "type": "historical_book",
+      "authors": [
+        "Annie Besant",
+        "C. W. Leadbeater"
+      ],
+      "tags": [
+        "aura",
+        "thought_forms",
+        "esotericism",
+        "visual_atlas"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/16269",
+      "rights_statement": "Public domain USA (Project Gutenberg); authors died 1933 and 1934",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Illustrated map of claimed thought forms, colour meanings and clairvoyance. Illustrations from period edition require asset-level provenance.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "atkinson-1912",
+      "title": "The Human Aura: Astral Colors and Thought Forms",
+      "year": 1912,
+      "type": "historical_book",
+      "authors": [
+        "William Walker Atkinson"
+      ],
+      "tags": [
+        "aura",
+        "thought_forms",
+        "colour_theory",
+        "occultism"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/22739",
+      "rights_statement": "Public domain USA (Project Gutenberg); author died 1932",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Older speculative aura-colour system, practical suggestions and philosophy; not validated science.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "leadbeater-1899",
+      "title": "Clairvoyance",
+      "year": 1899,
+      "type": "historical_book",
+      "authors": [
+        "C. W. Leadbeater"
+      ],
+      "tags": [
+        "clairvoyance",
+        "remote_perception",
+        "esotericism"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/29399",
+      "rights_statement": "Public domain USA (Project Gutenberg); author died 1934",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Leadbeater theoretical taxonomy of claimed clairvoyant abilities.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "sinclair-1930",
+      "title": "Mental Radio",
+      "year": 1930,
+      "type": "historical_book",
+      "authors": [
+        "Upton Sinclair",
+        "Mary Craig Sinclair"
+      ],
+      "tags": [
+        "telepathy",
+        "drawing_transmission",
+        "case_study"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/63693",
+      "rights_statement": "Public domain USA (Project Gutenberg); literary author died 1968",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Book describing Mary Craig Sinclair reported thought/drawing transmission experiments, with methodological criticisms.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "myers-1903",
+      "title": "Human Personality and Its Survival of Bodily Death",
+      "year": 1903,
+      "type": "historical_book",
+      "authors": [
+        "Frederic W. H. Myers"
+      ],
+      "tags": [
+        "telepathy",
+        "apparitions",
+        "hypnosis",
+        "consciousness",
+        "psychical_research"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/38492",
+      "rights_statement": "Public domain USA (Project Gutenberg); author died 1901",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Comprehensive early psychical research text; this Gutenberg edition edited and abridged by L. H. Myers.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "gurney-myers-podmore-1886",
+      "title": "Phantasms of the Living (two volumes)",
+      "year": 1886,
+      "type": "historical_book",
+      "authors": [
+        "Edmund Gurney",
+        "Frederic W. H. Myers",
+        "Frank Podmore"
+      ],
+      "tags": [
+        "telepathy",
+        "apparitions",
+        "case_catalogue",
+        "psychical_research"
+      ],
+      "source_url": "https://onlinebooks.library.upenn.edu/webbin/book/lookupid?key=olbp60900",
+      "rights_statement": "Original nineteenth-century work public domain NZ; modern transcriptions may carry restrictions",
+      "ingest_policy": "source_only_pending_edition",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Contemporaneous accounts of apparent telepathy and apparitions; source editions and cases should be page-cited. Do not bulk-import Esalen modern transcription (CC BY-NC-ND).",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "leadbeater-1902",
+      "title": "Man Visible and Invisible",
+      "year": 1902,
+      "type": "historical_book",
+      "authors": [
+        "C. W. Leadbeater"
+      ],
+      "tags": [
+        "aura",
+        "colour_atlas",
+        "subtle_bodies"
+      ],
+      "source_url": "https://cwltribute.com/index.php/en-us/his-works/his-books",
+      "rights_statement": "Historical text likely public domain NZ; source scan rights unverified",
+      "ingest_policy": "source_only_pending_edition",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Illustrated aura atlas described on author bibliography; verify specific downloadable file before mirroring.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "sinnett-1892",
+      "title": "The Rationale of Mesmerism",
+      "year": 1892,
+      "type": "historical_book",
+      "authors": [
+        "A. P. Sinnett"
+      ],
+      "tags": [
+        "mesmerism",
+        "animal_magnetism",
+        "hypnosis"
+      ],
+      "source_url": "https://wellcomecollection.org/works/cywes2zk",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Period exposition of mesmerism, a historically significant but unreliable medical theory.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "grimes-1845",
+      "title": "Etherology, or, The Philosophy of Mesmerism and Phrenology",
+      "year": 1845,
+      "type": "historical_book",
+      "authors": [
+        "J. Stanley Grimes"
+      ],
+      "tags": [
+        "mesmerism",
+        "phrenology",
+        "sleep",
+        "consciousness"
+      ],
+      "source_url": "https://wellcomecollection.org/works/tczwh6tc",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Historical framework for mesmerism/phrenology and claimed mental influences; phrenology pseudoscientific.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "russell-mesmerism-1800s",
+      "title": "On Mesmerism",
+      "year": 1850,
+      "type": "historical_book",
+      "authors": [
+        "John Rutherfurd Russell"
+      ],
+      "tags": [
+        "mesmerism",
+        "animal_magnetism"
+      ],
+      "source_url": "https://wellcomecollection.org/works/b9f5qc5w",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Nineteenth-century work (date approximate: catalog dates between 1800 and 1899).",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "barth-1853",
+      "title": "What Is Mesmerism? Mesmerism Not Miracle",
+      "year": 1853,
+      "type": "historical_book",
+      "authors": [
+        "George Barth"
+      ],
+      "tags": [
+        "mesmerism",
+        "magnetic_healing",
+        "history"
+      ],
+      "source_url": "https://wellcomecollection.org/works/utag9jgj",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Historical mesmeric healing claims; not medical advice or validated treatment.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "coates-1890s",
+      "title": "How to Mesmerise",
+      "year": 1895,
+      "type": "historical_book",
+      "authors": [
+        "James Coates"
+      ],
+      "tags": [
+        "mesmerism",
+        "clairvoyance",
+        "thought_reading"
+      ],
+      "source_url": "https://wellcomecollection.org/works/e4hcgfxx",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "1890s illustrated manual; approximate year 1890-1899. Treat methods as historical, not validated.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "iapsop-archive",
+      "title": "IAPSOP Periodicals and Standard Spiritualist and Occult Corpus",
+      "year": 2026,
+      "type": "archive",
+      "authors": [
+        "IAPSOP"
+      ],
+      "tags": [
+        "spiritualism",
+        "occultism",
+        "telepathy",
+        "auras",
+        "periodicals",
+        "source_archive"
+      ],
+      "source_url": "https://iapsop.com/",
+      "rights_statement": "CC BY-NC 4.0 IAPSOP/SSOC; bulk redistribution/commercial use restricted",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Approximately 4.95 million pages and 1.2 TB; catalogue/link only without separate rights clearance; archive server explicitly throttles bots.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "spr-journal-1884",
+      "title": "Journal of the Society for Psychical Research, early volumes",
+      "year": 1884,
+      "type": "archive",
+      "authors": [
+        "Society for Psychical Research"
+      ],
+      "tags": [
+        "telepathy",
+        "psychical_research",
+        "case_reports",
+        "experimental_methods"
+      ],
+      "source_url": "https://onlinebooks.library.upenn.edu/webbin/serial?id=jsocpsychicrsch",
+      "rights_statement": "Issue-level rights vary; pre-1900 editions often old; source scan conditions vary",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Periodical archive directory for historical experiments and case studies.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "spr-archive-guide",
+      "title": "Society for Psychical Research institutional archive",
+      "year": 1882,
+      "type": "archive",
+      "authors": [
+        "Society for Psychical Research"
+      ],
+      "tags": [
+        "telepathy",
+        "apparitions",
+        "reincarnation",
+        "correspondence"
+      ],
+      "source_url": "https://open-data.spr.ac.uk/articles/archive-society-psychical-research/",
+      "rights_statement": "Access and copying limited for archival manuscripts",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Cambridge archival holdings including correspondence, equipment and audiovisual material.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "aspr-journal",
+      "title": "American Society for Psychical Research historical journal",
+      "year": 1900,
+      "type": "archive",
+      "authors": [
+        "American Society for Psychical Research"
+      ],
+      "tags": [
+        "telepathy",
+        "psychical_research",
+        "experiment_reports"
+      ],
+      "source_url": "https://aspr.com/journal",
+      "rights_statement": "Rights vary by individual article",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Index of historical published studies and their scans.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "pear-publications",
+      "title": "Princeton Engineering Anomalies Research published work",
+      "year": 1979,
+      "type": "archive",
+      "authors": [
+        "Robert G. Jahn",
+        "Brenda J. Dunne",
+        "Roger Nelson"
+      ],
+      "tags": [
+        "mind_matter",
+        "random_events",
+        "remote_perception"
+      ],
+      "source_url": "https://www.pear-lab.com/publications",
+      "rights_statement": "Publisher/article rights not fully verified",
+      "ingest_policy": "index_only",
+      "evidence_category": "contested_empirical",
+      "editorial_note": "Approximately 62 publication entries covering remote perception and human-machine interaction. Do not treat claimed anomalous effects as established.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "pear-1995",
+      "title": "Consciousness and Anomalous Physical Phenomena",
+      "year": 1995,
+      "type": "research_paper",
+      "authors": [
+        "Brenda J. Dunne",
+        "Robert G. Jahn"
+      ],
+      "tags": [
+        "mind_matter",
+        "random_events",
+        "PEAR"
+      ],
+      "source_url": "https://pearlab.icrl.org/pdfs/1995-consciousness-anomalous-physical-phenomena.pdf",
+      "rights_statement": "PDF accessible; reuse/redistribution rights unverified",
+      "ingest_policy": "index_only",
+      "evidence_category": "contested_empirical",
+      "editorial_note": "PEAR overview; full document is linked rather than bundled.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "gcp-dataset",
+      "title": "Global Consciousness Project random event generator network",
+      "year": 1998,
+      "type": "research_dataset",
+      "authors": [
+        "Roger Nelson",
+        "Global Consciousness Project"
+      ],
+      "tags": [
+        "global_consciousness",
+        "random_events",
+        "statistical_analysis"
+      ],
+      "source_url": "https://global-mind.org/extract.html",
+      "rights_statement": "Public CSV extraction provided; site copyright reserved; reuse terms need confirmation",
+      "ingest_policy": "research_data_permission_check",
+      "evidence_category": "contested_empirical",
+      "editorial_note": "1998 onward global random event recordings. Account for documented hardware errors; compare pre-registered event windows and baselines.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "gcp-errors",
+      "title": "Global Consciousness Project known data errors",
+      "year": 1998,
+      "type": "research_metadata",
+      "authors": [
+        "Roger Nelson",
+        "Global Consciousness Project"
+      ],
+      "tags": [
+        "random_events",
+        "data_quality"
+      ],
+      "source_url": "https://ww.global-mind.org/errors.html",
+      "rights_statement": "Copyright reserved; link only",
+      "ingest_policy": "index_only",
+      "evidence_category": "experimental_control",
+      "editorial_note": "Machine-specific faults and timestamps essential for any reproducible reanalysis.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "ganzfeld-1974-2018",
+      "title": "1974–2018 Ganzfeld Database",
+      "year": 2019,
+      "type": "research_dataset",
+      "authors": [
+        "Patrizio Tressoldi"
+      ],
+      "tags": [
+        "telepathy",
+        "ganzfeld",
+        "meta_analysis",
+        "psi_data"
+      ],
+      "source_url": "https://zenodo.org/records/14293732",
+      "rights_statement": "Open dataset with citation requirement; check file-level licence before redistribution",
+      "ingest_policy": "research_data_permission_check",
+      "evidence_category": "contested_empirical",
+      "editorial_note": "Spreadsheet metadata aggregating ganzfeld studies and reported outcomes, not raw individual trials.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "ganzfeld-2024",
+      "title": "Anomalous Perception in a Ganzfeld Condition: 1974–2020 meta-analysis",
+      "year": 2024,
+      "type": "research_paper",
+      "authors": [
+        "Patrizio Tressoldi",
+        "Lance Storm"
+      ],
+      "tags": [
+        "telepathy",
+        "ganzfeld",
+        "meta_analysis",
+        "replication"
+      ],
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11134153/",
+      "rights_statement": "Open-access article CC BY 4.0; linked Figshare data rights to verify",
+      "ingest_policy": "licensed_after_credit",
+      "evidence_category": "contested_empirical",
+      "editorial_note": "Authors report small pooled effect; interpretation disputed and does not establish telepathy. Study-level datasets and analysis syntax reported.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "stargate-archive",
+      "title": "STAR GATE remote viewing historical document guide",
+      "year": 1972,
+      "type": "archive",
+      "authors": [
+        "CIA",
+        "DIA",
+        "SRI International",
+        "IRVA"
+      ],
+      "tags": [
+        "remote_viewing",
+        "military_parapsychology",
+        "telepathy"
+      ],
+      "source_url": "https://www.irva.org/stargate-guide",
+      "rights_statement": "Mixed government/contractor/third-party documents; each item needs rights audit",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Guide to declassified remote viewing session records, training material, sketches and assessments from 1972–1995.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "cia-stargate-history",
+      "title": "Did CIA Really Study Psychic Powers?",
+      "year": 2021,
+      "type": "institutional_history",
+      "authors": [
+        "Central Intelligence Agency"
+      ],
+      "tags": [
+        "remote_viewing",
+        "stargate",
+        "assessment"
+      ],
+      "source_url": "https://www.cia.gov/stories/story/ask-molly-did-cia-really-study-psychic-powers/",
+      "rights_statement": "US government agency publication; third-party exceptions possible",
+      "ingest_policy": "index_only",
+      "evidence_category": "documented_history",
+      "editorial_note": "CIA account confirms programme existed, was assessed and not resumed as operational intelligence.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "duke-zener-cards",
+      "title": "Duke ESP / Zener cards museum record",
+      "year": 1937,
+      "type": "museum_object",
+      "authors": [
+        "J. B. Rhine",
+        "Duke University Library"
+      ],
+      "tags": [
+        "telepathy",
+        "forced_choice",
+        "ESP",
+        "experimental_equipment"
+      ],
+      "source_url": "https://exhibits.library.duke.edu/items/show/13403",
+      "rights_statement": "CC BY-NC-SA 4.0 for digitised exhibit; no commercial redistribution without clearance",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Digitised ESP card artefact and historic experimental context.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "kirlian-1976",
+      "title": "Image Modulation in Corona Discharge Photography",
+      "year": 1976,
+      "type": "research_paper",
+      "authors": [
+        "J. O. Pehek",
+        "H. J. Kyler",
+        "D. L. Faust"
+      ],
+      "tags": [
+        "kirlian_photography",
+        "aura",
+        "electricity",
+        "methodological_control"
+      ],
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/968480/",
+      "rights_statement": "Journal rights; abstract/index only",
+      "ingest_policy": "index_only",
+      "evidence_category": "scientific_explanation",
+      "editorial_note": "Scientific analysis attributes most image variation to moisture and corona discharge; useful control for aura claims.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "crookes-1874",
+      "title": "Researches in the Phenomena of Spiritualism",
+      "year": 1874,
+      "type": "historical_book",
+      "authors": [
+        "William Crookes"
+      ],
+      "tags": [
+        "spiritualism",
+        "psychical_research",
+        "apparatus",
+        "historical_experiments"
+      ],
+      "source_url": "https://wellcomecollection.org/works/uvdnnvkv",
+      "rights_statement": "Public Domain Mark (Wellcome work)",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Nineteenth-century scientist’s experimental apparatus and claimed psychic-force investigations; not accepted evidence of spirits.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "burr-bibliography",
+      "title": "Bibliography of Harold Saxton Burr",
+      "year": 1958,
+      "type": "research_bibliography",
+      "authors": [
+        "Harold Saxton Burr"
+      ],
+      "tags": [
+        "bioelectricity",
+        "life_fields",
+        "biophysics"
+      ],
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2603696/",
+      "rights_statement": "Open online bibliography; rights of each underlying paper vary",
+      "ingest_policy": "index_only",
+      "evidence_category": "mixed_scientific_and_speculative",
+      "editorial_note": "Extensive bibliography of bioelectric measurements and theorised organizing fields. Electrical phenomena are real; the broader speculative interpretations require independent evaluation.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "ullman-krippner-1969",
+      "title": "Telepathic Perception in the Dream State: EEG-EOG Monitoring Techniques",
+      "year": 1969,
+      "type": "research_paper",
+      "authors": [
+        "Montague Ullman",
+        "Stanley Krippner"
+      ],
+      "tags": [
+        "dream_telepathy",
+        "REM",
+        "ganzfeld",
+        "experimental_protocol"
+      ],
+      "source_url": "https://journals.sagepub.com/doi/10.2466/pms.1969.29.3.915",
+      "rights_statement": "Publisher-restricted article; bibliographic link only",
+      "ingest_policy": "index_only",
+      "evidence_category": "contested_empirical",
+      "editorial_note": "Historical REM-sleep dream-target correspondence experiment with reported positive results; later independent replication disputed.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "soviet-parapsychology-1964",
+      "title": "Annotated Bibliography on Soviet-Bloc Parapsychology",
+      "year": 1964,
+      "type": "government_bibliography",
+      "authors": [
+        "US Defense Documentation Center"
+      ],
+      "tags": [
+        "soviet_parapsychology",
+        "telepathy",
+        "biomagnetism",
+        "history"
+      ],
+      "source_url": "https://www.cia.gov/readingroom/docs/NSA-RDP96X00790R000100040021-1.pdf",
+      "rights_statement": "Declassified document; embedded third-party citations may have independent copyright",
+      "ingest_policy": "index_only",
+      "evidence_category": "documented_history",
+      "editorial_note": "1964 bibliography indexing Soviet-bloc scientific literature about parapsychology, hypnotism and biomagnetism; evidence of research interest, not validation.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "stargate-cia-collection-2026",
+      "title": "STAR GATE declassified collection",
+      "year": 2004,
+      "type": "government_archive",
+      "authors": [
+        "CIA",
+        "Defense Intelligence Agency"
+      ],
+      "tags": [
+        "remote_viewing",
+        "cia",
+        "stargate",
+        "grill_flame",
+        "center_lane"
+      ],
+      "source_url": "https://www.cia.gov/readingroom/collection/stargate",
+      "rights_statement": "Published government records; third-party materials and privacy restrictions may apply",
+      "ingest_policy": "index_only",
+      "evidence_category": "documented_program",
+      "editorial_note": "Official searchable entry point. CIA confirmed 11,985 documents and 89,901 pages in a 2006 FOIA response. Declassification does not validate claims.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "stargate-inventory-2006",
+      "title": "CIA letter: Size and Scope of the STAR GATE Collection",
+      "year": 2006,
+      "type": "official_record",
+      "authors": [
+        "Central Intelligence Agency"
+      ],
+      "tags": [
+        "remote_viewing",
+        "cia",
+        "archive_inventory",
+        "provenance"
+      ],
+      "source_url": "https://www.cia.gov/readingroom/docs/DOC_0001299750.pdf",
+      "rights_statement": "US government record; verify any third-party rights before copying",
+      "ingest_policy": "index_only",
+      "evidence_category": "documented_program",
+      "editorial_note": "CIA's contemporaneous records count and scope of related programme names.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "stargate-assessment-1995",
+      "title": "An Evaluation of Remote Viewing: Research and Applications",
+      "year": 1995,
+      "type": "official_review",
+      "authors": [
+        "American Institutes for Research"
+      ],
+      "tags": [
+        "remote_viewing",
+        "stargate",
+        "critical_assessment",
+        "methodology"
+      ],
+      "source_url": "https://www.cia.gov/readingroom/document/cia-rdp96-00791r000100150002-0",
+      "rights_statement": "CIA hosted review/summary; rights of external contributors need verification",
+      "ingest_policy": "index_only",
+      "evidence_category": "mixed_evidence",
+      "editorial_note": "Operational review concluded remote-viewing reports were too vague and unreliable for intelligence; laboratory interpretation remained disputed.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "sri-perceptual-augmentation-1975",
+      "title": "Perceptual Augmentation Techniques, Part Two: Research Report",
+      "year": 1975,
+      "type": "historical_study",
+      "authors": [
+        "Stanford Research Institute"
+      ],
+      "tags": [
+        "remote_viewing",
+        "experiment",
+        "sri",
+        "blind_judging"
+      ],
+      "source_url": "https://www.cia.gov/readingroom/document/cia-rdp96-00791r000300030003-0",
+      "rights_statement": "Declassified contractor report; third-party copyright may apply",
+      "ingest_policy": "index_only",
+      "evidence_category": "contested_experiment",
+      "editorial_note": "SRI authors reported positive results. Study design, judging, sensory leakage and subsequent replications remain essential context.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "sri-remote-viewing-protocols",
+      "title": "Remote-Viewing Field Experiments: Original Protocol Material",
+      "year": 1970,
+      "type": "historical_study",
+      "authors": [
+        "Stanford Research Institute"
+      ],
+      "tags": [
+        "remote_viewing",
+        "experiment",
+        "protocols",
+        "ingo_swann"
+      ],
+      "source_url": "https://www.cia.gov/readingroom/document/cia-rdp81b00401r002600010013-2",
+      "rights_statement": "Declassified report; individual content reuse review required",
+      "ingest_policy": "index_only",
+      "evidence_category": "contested_experiment",
+      "editorial_note": "Original experimental narratives, blind-ranking procedures and descriptions of false matches. Year approximate, 1970s.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "pear-princeton-technical-notes",
+      "title": "PEAR Laboratory Technical Notes (55 items)",
+      "year": 1980,
+      "type": "institutional_archive",
+      "authors": [
+        "Princeton University",
+        "Robert G. Jahn",
+        "Brenda J. Dunne"
+      ],
+      "tags": [
+        "pear",
+        "psychokinesis",
+        "random_generators",
+        "intention",
+        "research_archive"
+      ],
+      "source_url": "https://findingaids.princeton.edu/catalog/ENG003",
+      "rights_statement": "Finding aid accessible; original notes subject to institutional archive rights",
+      "ingest_policy": "index_only",
+      "evidence_category": "contested_research_archive",
+      "editorial_note": "Princeton finding aid lists 55 PEAR technical notes. Decades of laboratory research; do not assert anomalous effects established.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "duke-parapsychology-exhibition",
+      "title": "Early Studies in Parapsychology at Duke",
+      "year": 2017,
+      "type": "institutional_exhibition",
+      "authors": [
+        "Duke University Libraries"
+      ],
+      "tags": [
+        "j_b_rhine",
+        "duke",
+        "esp",
+        "zener_cards",
+        "archive"
+      ],
+      "source_url": "https://exhibits.library.duke.edu/exhibits/show/parapsychology/about-the-exhibit",
+      "rights_statement": "University exhibit; permission needed for rehosting images/archival documents",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Duke curated exhibition based on Parapsychology Laboratory Records (1893–1984).",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "rhine-collection-guide",
+      "title": "Rhine Research Center Research Library and Journal",
+      "year": 2026,
+      "type": "institutional_archive",
+      "authors": [
+        "Rhine Research Center"
+      ],
+      "tags": [
+        "j_b_rhine",
+        "telepathy",
+        "precognition",
+        "psychical_research",
+        "journal"
+      ],
+      "source_url": "https://www.rhineonline.org/about-us",
+      "rights_statement": "Institutional library and journal; full text not licensed for redistribution",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Rhine states it holds a complete Journal of Parapsychology from 1937 onward; catalogue and link only.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "gcp-original-data-access",
+      "title": "Global Consciousness Project: Original Raw Data Access",
+      "year": 1998,
+      "type": "research_dataset",
+      "authors": [
+        "Roger D. Nelson",
+        "Global Consciousness Project"
+      ],
+      "tags": [
+        "random_generators",
+        "global_consciousness",
+        "raw_data",
+        "time_series",
+        "eggs"
+      ],
+      "source_url": "https://ww.global-mind.org/gcpdata.html",
+      "rights_statement": "Research access documented; confirm data redistribution/licence",
+      "ingest_policy": "research_data_permission_check",
+      "evidence_category": "contested_experiment",
+      "editorial_note": "Original EGG network data available through project-specific extract mechanisms. Statistical associations contested.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "gcp-controls-pseudoeggs",
+      "title": "GCP Control Experiments and Pseudo-EGG Data",
+      "year": 2001,
+      "type": "methodological_record",
+      "authors": [
+        "John Walker",
+        "Roger D. Nelson"
+      ],
+      "tags": [
+        "random_generators",
+        "controls",
+        "pseudorandom",
+        "methodology"
+      ],
+      "source_url": "https://teilhatd.global-mind.org/pseudoeggs.html",
+      "rights_statement": "Research links and historical control descriptions; offline dataset requires request",
+      "ingest_policy": "index_only",
+      "evidence_category": "control_reference",
+      "editorial_note": "Control-data design proposed in 2001; linked pseudoegg database now offline and access by request.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "gcp-errors-list",
+      "title": "Global Consciousness Project: Known Hardware and Data Errors",
+      "year": 1998,
+      "type": "methodological_record",
+      "authors": [
+        "Global Consciousness Project"
+      ],
+      "tags": [
+        "random_generators",
+        "quality_control",
+        "data_errors",
+        "limitations"
+      ],
+      "source_url": "https://wap.global-mind.org/errors.html",
+      "rights_statement": "Public project documentation; reference and link",
+      "ingest_policy": "index_only",
+      "evidence_category": "control_reference",
+      "editorial_note": "Essential exclusions for independent analysis. Device failures have been recorded and must be handled.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "vasiliev-1962-russian",
+      "title": "Vnushenie na rasstoianii (Mental Suggestion at a Distance)",
+      "year": 1962,
+      "type": "historical_book",
+      "authors": [
+        "Leonid L. Vasiliev"
+      ],
+      "tags": [
+        "soviet",
+        "telepathy",
+        "hypnosis",
+        "physiology",
+        "psychotronics"
+      ],
+      "source_url": "https://djvu.online/file/wcXP4UMVvKUUE",
+      "rights_statement": "1962 Soviet publication; rights and scan provenance unresolved",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Russian original describes long-distance hypnotic suggestion experiments. Inadequate independent replication and reporting concerns.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "vasiliev-1976-english",
+      "title": "Experiments in Distant Influence",
+      "year": 1976,
+      "type": "historical_book",
+      "authors": [
+        "Leonid L. Vasiliev",
+        "Anita Gregory"
+      ],
+      "tags": [
+        "soviet",
+        "telepathy",
+        "hypnosis",
+        "translated_research"
+      ],
+      "source_url": "https://wellcomecollection.org/works/a2xhm6a4",
+      "rights_statement": "English translation/publisher copyright not cleared",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Bibliographic record of English translation of Vasiliev's work; no permission to host scanned translation established.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "vasiliev-criticism-context",
+      "title": "Leonid Vasiliev: Research and Critical Reception",
+      "year": 2022,
+      "type": "research_biography",
+      "authors": [
+        "Society for Psychical Research"
+      ],
+      "tags": [
+        "soviet",
+        "telepathy",
+        "critical_context",
+        "replication"
+      ],
+      "source_url": "https://psi-encyclopedia.spr.ac.uk/articles/leonid-vasiliev",
+      "rights_statement": "Copyrighted modern reference article; link only",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_analysis",
+      "editorial_note": "Details Soviet programme, published allegations, limitations and criticism of reporting.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "braid-1846-mesmerism-critique",
+      "title": "The Power of the Mind over the Body",
+      "year": 1846,
+      "type": "historical_book",
+      "authors": [
+        "James Braid"
+      ],
+      "tags": [
+        "mesmerism",
+        "reichenbach",
+        "expectation",
+        "experimental_control"
+      ],
+      "source_url": "https://wellcomecollection.org/works/b7qgpes2",
+      "rights_statement": "Wellcome Public Domain Mark",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_analysis",
+      "editorial_note": "Early critical inquiry into effects attributed to Baron Reichenbach's 'imponderable' force. Valuable contemporary counterpoint.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "fort-1919-book-damned",
+      "title": "The Book of the Damned",
+      "year": 1919,
+      "type": "historical_book",
+      "authors": [
+        "Charles Fort"
+      ],
+      "tags": [
+        "anomalies",
+        "fortean",
+        "unusual_falls",
+        "observations",
+        "ufo_history"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/22472",
+      "rights_statement": "Project Gutenberg: public domain USA; historical author died 1932; check edition and NZ rights",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Classic catalogue of anomalous reports. Many anecdotes lack independent corroboration; tag events as allegations.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "fort-1923-new-lands",
+      "title": "New Lands",
+      "year": 1923,
+      "type": "historical_book",
+      "authors": [
+        "Charles Fort"
+      ],
+      "tags": [
+        "fortean",
+        "astronomy",
+        "unusual_observations",
+        "history"
+      ],
+      "source_url": "https://www.gutenberg.org/ebooks/5324",
+      "rights_statement": "Project Gutenberg: check source edition, local rights and possible corrections",
+      "ingest_policy": "fulltext_candidate",
+      "evidence_category": "historical_claim",
+      "editorial_note": "Fortean accounts involving astronomy and unusual observations, not a verified physics theory.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "tart-bibliography",
+      "title": "Charles T. Tart: Published Research Bibliography",
+      "year": 1962,
+      "type": "researcher_bibliography",
+      "authors": [
+        "Charles T. Tart"
+      ],
+      "tags": [
+        "altered_states",
+        "hypnosis",
+        "transpersonal",
+        "telepathy",
+        "bibliography"
+      ],
+      "source_url": "https://archive.galileocommission.org/tart-charles-professor-articles-chapters-letters-and-reviews/",
+      "rights_statement": "Copyrighted compiled bibliography; titles, author, year and links only",
+      "ingest_policy": "index_only",
+      "evidence_category": "historical_collection",
+      "editorial_note": "Long bibliography for researcher dossier and crosslinks; bibliographic coverage begins 1962.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    },
+    {
+      "id": "corona-1976-pehek",
+      "title": "Image Modulation in Corona Discharge Photography",
+      "year": 1976,
+      "type": "peer_reviewed_study",
+      "authors": [
+        "J. O. Pehek",
+        "H. J. Kyler",
+        "D. L. Faust"
+      ],
+      "tags": [
+        "kirlian",
+        "aura",
+        "corona_discharge",
+        "moisture",
+        "controls"
+      ],
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/968480/",
+      "rights_statement": "Abstract is publicly accessible; article reuse not cleared",
+      "ingest_policy": "index_only",
+      "evidence_category": "empirical_explanation",
+      "editorial_note": "Physical explanation of many Kirlian image variations through corona discharge, moisture and circuit parameters; not proof of paranormal auras.",
+      "full_text_included": false,
+      "record_reviewed": "2026-10-26"
+    }
+  ],
+  "updated_on": "2026-10-26"
+}
