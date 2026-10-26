@@ -1,5 +1,5 @@
-const CACHE = "neurolab-shell-v46";
-const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg", "./astronomy.browser.min.js"];
+const CACHE = "neurolab-shell-v47";
+const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg", "./astronomy.browser.min.js", "./oracle/index.html", "./compendium/sources.json", "./compendium/oracle-schools.json"];
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -27,22 +27,24 @@ self.addEventListener("fetch", event => {
   // and can hide the real offline condition from the app.
   if (url.origin !== self.location.origin) return;
 
+  const isOracle = /\/oracle\/(?:index\.html)?$/.test(url.pathname);
   const isAppShell =
     event.request.mode === "navigate" ||
     url.pathname.endsWith("/index.html") ||
     url.pathname.endsWith("/Neuro-Lab/") ||
     url.pathname.endsWith("/Neuro-Lab");
-
   if (isAppShell) {
+    const fallback = isOracle ? "./oracle/index.html" : "./index.html";
     event.respondWith(
       fetch(event.request)
         .then(response => {
           if (response && response.ok) {
-            caches.open(CACHE).then(cache => cache.put("./index.html", response.clone()));
+            const copy = response.clone();
+            caches.open(CACHE).then(cache => cache.put(fallback, copy));
           }
           return response;
         })
-        .catch(() => caches.match("./index.html"))
+        .catch(() => caches.match(fallback))
     );
     return;
   }
