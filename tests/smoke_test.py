@@ -84,7 +84,7 @@ class NeuroLabSmokeTests(unittest.TestCase):
 
     def test_mind_progress_insights_use_recent_checkins_and_reflection_count(self):
         self.assertIn('const recent=entries.slice(-3)', self.html)
-        self.assertIn('const recentTotal=recent.length', self.html)
+        self.assertIn('recentCounts=recent.reduce', self.html)
         self.assertIn('label:"Reflections",value:String(reflectionCount)', self.html)
         self.assertIn('Your recent check-ins more often say the step helped.', self.html)
         self.assertIn('Your recent check-ins show friction or difficulty.', self.html)
@@ -213,7 +213,9 @@ class NeuroLabSmokeTests(unittest.TestCase):
         self.assertIn('target.closest(".world-choice[data-world]")', self.html)
         self.assertIn('target.closest("#closeCosmos")', self.html)
         worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
-        self.assertIn('const CACHE = "neurolab-shell-v46"', worker)
+        self.assertRegex(worker, r'const CACHE = "neurolab-shell-v[0-9]+"')
+        self.assertIn('"./oracle/index.html"', worker)
+        self.assertIn('"./compendium/oracle-schools.json"', worker)
         self.assertIn('if (url.origin !== self.location.origin) return;', worker)
         self.assertIn('event.request.mode === "navigate"', worker)
         self.assertIn('let the request fail normally instead of substituting HTML for that asset', worker)
